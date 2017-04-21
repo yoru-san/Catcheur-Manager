@@ -13,8 +13,7 @@ namespace Catcheur_Manager
     {
         static void Main(string[] args)
         {
-            
-            Player player = new Models.Player(Console.ReadLine());
+            Menu.MenuStart();
 
         }
     }
