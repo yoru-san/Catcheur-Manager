@@ -16,5 +16,10 @@ namespace Catcheur_Manager.Models
         {
             Name = name;
         }
+
+        void Play()
+        {
+
+        }
     }
 }

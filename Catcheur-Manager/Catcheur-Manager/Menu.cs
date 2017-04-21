@@ -31,9 +31,19 @@ namespace Catcheur_Manager
 
             }
 
+            Console.Clear();
             Player player = new Player(name);
 
         }
+
+        public static void MenuPlayer(Player player)
+        {
+            bool end = false;
+            Console.WriteLine($"Bénéfices: {player.Money}\n\n0. -> Créer le match de samedi prochain\n1. -> Consulter l'historique des matchs\n2. -> Consulter la base des contacts\n3. Quitter le jeu\n");
+
+
+        }
+
 
         static int MenuIntParse(int min, int max)
         {
