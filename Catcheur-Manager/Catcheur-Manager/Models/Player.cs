@@ -8,5 +8,13 @@ namespace Catcheur_Manager.Models
 {
     class Player
     {
+        public int Money { get; set; }
+
+        public string Name { get; set; }
+
+        public Player(string name)
+        {
+            Name = name;
+        }
     }
 }
