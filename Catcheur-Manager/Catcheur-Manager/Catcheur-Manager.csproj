@@ -46,6 +46,8 @@
     <Compile Include="Menu.cs" />
     <Compile Include="Models\Player.cs" />
     <Compile Include="Models\Wrestler\Wrestler.cs" />
+    <Compile Include="Models\Wrestler\Wrestler_Agile.cs" />
+    <Compile Include="Models\Wrestler\Wrestler_Brute.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="test.cs" />

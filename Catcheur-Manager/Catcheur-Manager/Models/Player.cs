@@ -15,6 +15,9 @@ namespace Catcheur_Manager.Models
         public Player(string name)
         {
             Name = name;
+            Money = 0;
+
+            Menu.MenuPlayer(this);
         }
 
         void Play()
