@@ -9,6 +9,10 @@ namespace Catcheur_Manager.Models
 {
     class Match
     {
+        public static int idNum { get; set; }
+
+        public int id { get; set; }
+
         protected int Iteration {get; set; }
 
         protected int IterationMax { get; set; }
@@ -19,7 +23,14 @@ namespace Catcheur_Manager.Models
         public bool WayOfWinning { get; set; }
         public int Profit { get; set; }
 
+        public bool isEnd { get; set; }
+
         public Season MatchSeason { get; set; }
+
+        public Match()
+        {
+            isEnd = false;
+        }
 
         public Match(int iteration, Wrestler firstWrestler, Wrestler secondWrestler, Wrestler winner, Wrestler loser, bool wayOfWinning, int profit)
         {
@@ -32,13 +43,21 @@ namespace Catcheur_Manager.Models
             Profit = profit;
         }
 
-        public Match(Wrestler wres1, Wrestler wres2)
+        public Match(Wrestler wres1, Wrestler wres2, Season currentSeason)
         {
+            id = idNum;
+            id++;
+            isEnd = false;
+
             Iteration = 0;
             IterationMax = 20;
+
+            MatchSeason = currentSeason;
+            currentSeason.CurrentMatch = this;
+            currentSeason.MatchHistory.Add(this);
+
             FirstWrestler = wres1;
             SecondWrestler = wres2;
-            Start();
 
         }
 

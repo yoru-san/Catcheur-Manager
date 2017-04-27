@@ -23,6 +23,8 @@ namespace Catcheur_Manager.Models
             CurrentSeason = new Season();
             ContactList = new List<Wrestler>();
 
+            generateBaseContacts();
+
 
             Menu.MenuPlayer(this);
             

@@ -12,7 +12,6 @@ namespace Catcheur_Manager
     {
         static void Main(string[] args)
         {
-            Wrestler.generateBaseContacts();
             Menu.MenuStart();
 
         }

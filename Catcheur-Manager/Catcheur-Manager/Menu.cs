@@ -102,65 +102,76 @@ namespace Catcheur_Manager
 
         public static void MenuMatch(Player player)
         {
-            bool end = false;
-            int choix = -1;
-            Wrestler wres1;
-            Wrestler wres2;
-            
-            
-
-            while (!end)
+            if (!player.CurrentSeason.CurrentMatch.isEnd)
             {
-                Console.Clear();
-                Console.WriteLine("Création du match de samedi soir: \nSélectionnez deux catcheurs parmis la liste:\nPremier catcheur:\n\n0 -> Quitter");
-                player.printContactList(player.getAvailableWrestler());
+                MenuMatchLaunch();
+            }
+            else
+            {
+                bool end = false;
+                int choix = -1;
+                Wrestler wres1;
+                Wrestler wres2;
 
-                choix = MenuIntParse(0, player.getAvailableWrestler().Count());
 
-                if(choix != 0)
+
+                while (!end)
                 {
-                    wres1 = player.SelectWrestler(choix - 1);
+
                     Console.Clear();
-                    choix = 0;
-                    
-                    Console.WriteLine($"Création du match de samedi soir: \nSélectionnez deux catcheurs parmis la liste:\nPremier catcheur: {wres1.Name}\nSecond catcheur:\n\n0 -> Quitter");
+                    Console.WriteLine("Création du match de samedi soir: \nSélectionnez deux catcheurs parmis la liste:\nPremier catcheur:\n\n0 -> Quitter");
                     player.printContactList(player.getAvailableWrestler());
+
                     choix = MenuIntParse(0, player.getAvailableWrestler().Count());
 
                     if (choix != 0)
                     {
-                        wres2 = player.SelectWrestler(choix - 1);
+                        wres1 = player.SelectWrestler(choix - 1);
+                        Console.Clear();
+                        choix = 0;
 
-                        Console.WriteLine($"Catcheurs sélectionnés: {wres1.Name} et {wres2.Name}\nConfirmer?\t0 -> Oui\t1 -> Non");
-                        choix = MenuIntParse(0, 1);
+                        Console.WriteLine($"Création du match de samedi soir: \nSélectionnez deux catcheurs parmis la liste:\nPremier catcheur: {wres1.Name}\nSecond catcheur:\n\n0 -> Quitter");
+                        player.printContactList(player.getAvailableWrestler());
+                        choix = MenuIntParse(0, player.getAvailableWrestler().Count());
 
-                        if (choix == 0)
+                        if (choix != 0)
                         {
-                            new Match(wres1, wres2);
+                            wres2 = player.SelectWrestler(choix - 1);
+
+                            Console.WriteLine($"Catcheurs sélectionnés: {wres1.Name} et {wres2.Name}\nConfirmer?\t0 -> Oui\t1 -> Non");
+                            choix = MenuIntParse(0, 1);
+
+                            if (choix == 0)
+                            {
+                                new Match(wres1, wres2, player.CurrentSeason);
+                                end = true;
+                            }
+                            else
+                            {
+                                wres1.UnselectWrestler();
+                                wres2.UnselectWrestler();
+                            }
                         }
                         else
                         {
                             wres1.UnselectWrestler();
-                            wres2.UnselectWrestler();
+                            end = true;
                         }
-                        
                     }
                     else
                     {
-                        wres1.UnselectWrestler();
+
                         end = true;
                     }
                 }
-                else
-                {
-                    
-                    end = true;
-                }
-
-
-
-
             }
+
+
+
+        }
+
+        public static void MenuMatchLaunch()
+        {
 
         }
 
