@@ -10,6 +10,8 @@ namespace Catcheur_Manager.Models.Wrestler
     {
         public static List<Wrestler> ContactList { get; protected set; } = new List<Wrestler>();
 
+        //public static List<Wrestler> AvailableWrestler { get; set; } = new List<Wrestler>();
+
         public enum _status { Disponible = 0, En_Convalescence = 1, Hors_d_etat = 2};
         protected string Name { get; set; }
         protected int lifePoint { get; set; }
@@ -18,6 +20,8 @@ namespace Catcheur_Manager.Models.Wrestler
         protected int defensePoint { get; set; }
 
         public string specialDesc { get; set; }
+
+        protected bool isSelected { get; set; }
 
         public Wrestler(string name, _status status)
         {
@@ -51,10 +55,10 @@ namespace Catcheur_Manager.Models.Wrestler
 
         protected static void orderContactList()
         {
-            ContactList = ContactList.OrderBy(o => o.Status).ToList();
+            ContactList = ContactList.OrderBy(o => o.Status).OrderBy(o => o.Name).ToList();
         }
 
-        public static void printContactList()
+        public static void printContactList(List<Wrestler> ContactList)
         {
             string res = "";
             for (int i = 0; i < ContactList.Count; i++)
@@ -89,5 +93,25 @@ namespace Catcheur_Manager.Models.Wrestler
 
             }
         }
+
+        public static List<Wrestler> getAvailableWrestler()
+        {
+            return ContactList.Where(w => w.Status == _status.Disponible && !w.isSelected).ToList().OrderBy(w => w.Name).ToList();
+        }
+
+        public static Wrestler SelectWrestler(int index)
+        {
+            Wrestler selectedWrestler = getAvailableWrestler()[index];
+            selectedWrestler.isSelected = true;
+            return selectedWrestler;
+
+        }
+
+        public void UnselectWrestler()
+        {
+            isSelected = false;
+        }
+
+        
     }
 }

@@ -52,6 +52,7 @@ namespace Catcheur_Manager
                 switch (choix)
                 {
                     case 0:
+                        MenuMatch();
                         break;
                     case 1:
                         break;
@@ -80,7 +81,7 @@ namespace Catcheur_Manager
             while (!end)
             {
                 Console.WriteLine("Liste des contacts: \n\n0 -> Quitter");
-                Wrestler.printContactList();
+                Wrestler.printContactList(Wrestler.ContactList);
 
                 choix = MenuIntParse(0, Wrestler.ContactList.Count);
 
@@ -98,6 +99,54 @@ namespace Catcheur_Manager
 
             }
             Console.Clear();
+
+        }
+
+        public static void MenuMatch()
+        {
+            bool end = false;
+            int choix = -1;
+            Wrestler wres1;
+            Wrestler wres2;
+            List<Wrestler> availableWrestler = Wrestler.getAvailableWrestler();
+            
+
+            while (!end)
+            {
+                Console.WriteLine("Création du match de samedi soir: \nSélectionnez deux catcheurs parmis la liste:\nPremier catcheur:\n\n0 -> Quitter");
+                Wrestler.printContactList(availableWrestler);
+
+                choix = MenuIntParse(0, availableWrestler.Count());
+
+                if(choix != 0)
+                {
+                    wres1 = Wrestler.SelectWrestler(choix - 1);            
+                }
+                else
+                {
+                    
+                    end = true;
+                    break;
+                }
+
+                Console.Clear();
+                choix = 0;
+                Console.WriteLine("Création du match de samedi soir: \nSélectionnez deux catcheurs parmis la liste:\nSecond catcheur:\n\n0 -> Quitter");
+                Wrestler.printContactList(availableWrestler);
+
+                if(choix != 0)
+                {
+                    wres2 = Wrestler.SelectWrestler(choix - 1);
+                }
+                else
+                {
+                    wres1.UnselectWrestler();
+                    end = true;
+                    break;
+                }
+
+
+            }
 
         }
 
