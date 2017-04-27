@@ -13,7 +13,7 @@ namespace Catcheur_Manager.Models
         //public static List<Wrestler> AvailableWrestler { get; set; } = new List<Wrestler>();
 
         public enum _status { Disponible = 0, En_Convalescence = 1, Hors_d_etat = 2};
-        protected string Name { get; set; }
+        public string Name { get; set; }
         protected int lifePoint { get; set; }
         protected _status Status { get; set; }
         protected int attackPoint { get; set; }

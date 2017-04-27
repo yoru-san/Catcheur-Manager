@@ -106,28 +106,44 @@ namespace Catcheur_Manager
             int choix = -1;
             Wrestler wres1;
             Wrestler wres2;
-            List<Wrestler> availableWrestler = Wrestler.getAvailableWrestler();
+            
             
 
             while (!end)
             {
+                Console.Clear();
                 Console.WriteLine("Création du match de samedi soir: \nSélectionnez deux catcheurs parmis la liste:\nPremier catcheur:\n\n0 -> Quitter");
-                Wrestler.printContactList(availableWrestler);
+                Wrestler.printContactList(Wrestler.getAvailableWrestler());
 
-                choix = MenuIntParse(0, availableWrestler.Count());
+                choix = MenuIntParse(0, Wrestler.getAvailableWrestler().Count());
 
                 if(choix != 0)
                 {
                     wres1 = Wrestler.SelectWrestler(choix - 1);
                     Console.Clear();
                     choix = 0;
-                    Console.WriteLine("Création du match de samedi soir: \nSélectionnez deux catcheurs parmis la liste:\nSecond catcheur:\n\n0 -> Quitter");
-                    Wrestler.printContactList(availableWrestler);
+                    
+                    Console.WriteLine($"Création du match de samedi soir: \nSélectionnez deux catcheurs parmis la liste:\nPremier catcheur: {wres1.Name}\nSecond catcheur:\n\n0 -> Quitter");
+                    Wrestler.printContactList(Wrestler.getAvailableWrestler());
+                    choix = MenuIntParse(0, Wrestler.getAvailableWrestler().Count());
 
                     if (choix != 0)
                     {
                         wres2 = Wrestler.SelectWrestler(choix - 1);
-                        new Match();
+
+                        Console.WriteLine($"Catcheurs sélectionnés: {wres1.Name} et {wres2.Name}\nConfirmer?\t0 -> Oui\t1 -> Non");
+                        choix = MenuIntParse(0, 1);
+
+                        if (choix == 0)
+                        {
+                            new Match(wres1, wres2);
+                        }
+                        else
+                        {
+                            wres1.UnselectWrestler();
+                            wres2.UnselectWrestler();
+                        }
+                        
                     }
                     else
                     {
