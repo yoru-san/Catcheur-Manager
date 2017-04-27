@@ -50,12 +50,12 @@ namespace Catcheur_Manager
                 switch (choix)
                 {
                     case 0:
-                        MenuMatch();
+                        MenuMatch(player);
                         break;
                     case 1:
                         break;
                     case 2:
-                        MenuList();
+                        MenuList(player);
                         break;
                     case 3:
                         end = true;
@@ -66,7 +66,7 @@ namespace Catcheur_Manager
 
         }
 
-        public static void MenuList()
+        public static void MenuList(Player player)
         {
             Console.Clear();
             
@@ -79,9 +79,9 @@ namespace Catcheur_Manager
             while (!end)
             {
                 Console.WriteLine("Liste des contacts: \n\n0 -> Quitter");
-                Wrestler.printContactList(Wrestler.ContactList);
+                player.printContactList(player.ContactList);
 
-                choix = MenuIntParse(0, Wrestler.ContactList.Count);
+                choix = MenuIntParse(0, player.ContactList.Count);
 
                 switch (choix)
                 {
@@ -100,7 +100,7 @@ namespace Catcheur_Manager
 
         }
 
-        public static void MenuMatch()
+        public static void MenuMatch(Player player)
         {
             bool end = false;
             int choix = -1;
@@ -113,23 +113,23 @@ namespace Catcheur_Manager
             {
                 Console.Clear();
                 Console.WriteLine("Création du match de samedi soir: \nSélectionnez deux catcheurs parmis la liste:\nPremier catcheur:\n\n0 -> Quitter");
-                Wrestler.printContactList(Wrestler.getAvailableWrestler());
+                player.printContactList(player.getAvailableWrestler());
 
-                choix = MenuIntParse(0, Wrestler.getAvailableWrestler().Count());
+                choix = MenuIntParse(0, player.getAvailableWrestler().Count());
 
                 if(choix != 0)
                 {
-                    wres1 = Wrestler.SelectWrestler(choix - 1);
+                    wres1 = player.SelectWrestler(choix - 1);
                     Console.Clear();
                     choix = 0;
                     
                     Console.WriteLine($"Création du match de samedi soir: \nSélectionnez deux catcheurs parmis la liste:\nPremier catcheur: {wres1.Name}\nSecond catcheur:\n\n0 -> Quitter");
-                    Wrestler.printContactList(Wrestler.getAvailableWrestler());
-                    choix = MenuIntParse(0, Wrestler.getAvailableWrestler().Count());
+                    player.printContactList(player.getAvailableWrestler());
+                    choix = MenuIntParse(0, player.getAvailableWrestler().Count());
 
                     if (choix != 0)
                     {
-                        wres2 = Wrestler.SelectWrestler(choix - 1);
+                        wres2 = player.SelectWrestler(choix - 1);
 
                         Console.WriteLine($"Catcheurs sélectionnés: {wres1.Name} et {wres2.Name}\nConfirmer?\t0 -> Oui\t1 -> Non");
                         choix = MenuIntParse(0, 1);

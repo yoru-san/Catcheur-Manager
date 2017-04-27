@@ -19,6 +19,8 @@ namespace Catcheur_Manager.Models
         public bool WayOfWinning { get; set; }
         public int Profit { get; set; }
 
+        public Season MatchSeason { get; set; }
+
         public Match(int iteration, Wrestler firstWrestler, Wrestler secondWrestler, Wrestler winner, Wrestler loser, bool wayOfWinning, int profit)
         {
             Iteration = iteration;

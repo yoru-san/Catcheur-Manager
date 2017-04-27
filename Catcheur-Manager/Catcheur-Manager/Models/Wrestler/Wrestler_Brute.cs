@@ -9,14 +9,14 @@ namespace Catcheur_Manager.Models
     class Wrestler_Brute : Wrestler
     {
 
-        public Wrestler_Brute(string name, _status status) : base(name, status)
+        public Wrestler_Brute(string name, _status status, Player player) : base(name, status, player)
         {
             lifePoint = 100;
             attackPoint = 5;
             defensePoint = 1;
 
-            ContactList.Add(this);
-            orderContactList();
+            player.ContactList.Add(this);
+            player.orderContactList();
         }
     }
 }
