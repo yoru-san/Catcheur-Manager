@@ -5,12 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Catcheur_Manager.Models;
 
-
 namespace Catcheur_Manager.Models
 {
     class Match
     {
-        protected int Iteration { get; set; }
+        protected int Iteration {get; set; }
+
+        protected int IterationMax { get; set; }
         protected Wrestler FirstWrestler { get; set; }
         protected Wrestler SecondWrestler { get; set; }
         public Wrestler Winner { get; set; }
@@ -29,10 +30,27 @@ namespace Catcheur_Manager.Models
             Profit = profit;
         }
 
+        public Match(Wrestler wres1, Wrestler wres2)
+        {
+            Iteration = 0;
+            IterationMax = 20;
+            FirstWrestler = wres1;
+            SecondWrestler = wres2;
+            Start();
+
+        }
+
         public void CreateMatch()
         {
 
         }
 
+        public void Start()
+        {
+            while (Iteration <= IterationMax)
+            {
+
+            }
+        }
     }
 }

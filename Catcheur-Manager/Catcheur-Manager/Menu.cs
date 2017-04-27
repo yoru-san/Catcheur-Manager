@@ -118,30 +118,30 @@ namespace Catcheur_Manager
 
                 if(choix != 0)
                 {
-                    wres1 = Wrestler.SelectWrestler(choix - 1);            
+                    wres1 = Wrestler.SelectWrestler(choix - 1);
+                    Console.Clear();
+                    choix = 0;
+                    Console.WriteLine("Création du match de samedi soir: \nSélectionnez deux catcheurs parmis la liste:\nSecond catcheur:\n\n0 -> Quitter");
+                    Wrestler.printContactList(availableWrestler);
+
+                    if (choix != 0)
+                    {
+                        wres2 = Wrestler.SelectWrestler(choix - 1);
+                        new Match();
+                    }
+                    else
+                    {
+                        wres1.UnselectWrestler();
+                        end = true;
+                    }
                 }
                 else
                 {
                     
                     end = true;
-                    break;
                 }
 
-                Console.Clear();
-                choix = 0;
-                Console.WriteLine("Création du match de samedi soir: \nSélectionnez deux catcheurs parmis la liste:\nSecond catcheur:\n\n0 -> Quitter");
-                Wrestler.printContactList(availableWrestler);
 
-                if(choix != 0)
-                {
-                    wres2 = Wrestler.SelectWrestler(choix - 1);
-                }
-                else
-                {
-                    wres1.UnselectWrestler();
-                    end = true;
-                    break;
-                }
 
 
             }
