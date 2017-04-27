@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Match.cs" />
     <Compile Include="Menu.cs" />
     <Compile Include="Models\Player.cs" />
     <Compile Include="Models\Wrestler\Wrestler.cs" />
