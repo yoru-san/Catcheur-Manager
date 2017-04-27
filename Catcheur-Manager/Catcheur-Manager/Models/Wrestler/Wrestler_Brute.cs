@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Catcheur_Manager.Models.Wrestler
+namespace Catcheur_Manager.Models
 {
     class Wrestler_Brute : Wrestler
     {

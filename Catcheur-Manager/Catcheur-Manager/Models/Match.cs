@@ -3,17 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Catcheur_Manager.Models;
+
 
 namespace Catcheur_Manager.Models
 {
     class Match
     {
-        protected int Iteration {get; set; }
+        protected int Iteration { get; set; }
         protected Wrestler FirstWrestler { get; set; }
         protected Wrestler SecondWrestler { get; set; }
         public Wrestler Winner { get; set; }
         public Wrestler Loser { get; set; }
-        public  bool  WayOfWinning { get; set; }
+        public bool WayOfWinning { get; set; }
         public int Profit { get; set; }
 
         public Match(int iteration, Wrestler firstWrestler, Wrestler secondWrestler, Wrestler winner, Wrestler loser, bool wayOfWinning, int profit)
@@ -24,7 +26,7 @@ namespace Catcheur_Manager.Models
             Winner = winner;
             Loser = loser;
             WayOfWinning = wayOfWinning;
-            Profit = profit; 
+            Profit = profit;
         }
 
         public void CreateMatch()
