@@ -111,7 +111,7 @@ namespace Catcheur_Manager
 
             while (!end)
             {
-                Console.Clear();
+                //Console.Clear();
                 Console.WriteLine("Création du match de samedi soir: \nSélectionnez deux catcheurs parmis la liste:\nPremier catcheur:\n\n0 -> Quitter");
                 Wrestler.printContactList(Wrestler.getAvailableWrestler());
 
@@ -136,7 +136,9 @@ namespace Catcheur_Manager
 
                         if (choix == 0)
                         {
-                            new Match(wres1, wres2);
+                            Match newMatch = new Match(wres1, wres2);
+                            newMatch.Start();
+                            
                         }
                         else
                         {

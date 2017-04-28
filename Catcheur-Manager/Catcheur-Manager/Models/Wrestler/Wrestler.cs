@@ -12,7 +12,7 @@ namespace Catcheur_Manager.Models
 
         //public static List<Wrestler> AvailableWrestler { get; set; } = new List<Wrestler>();
 
-        public enum _status { Disponible = 0, En_Convalescence = 1, Hors_d_etat = 2};
+        public enum _status { Disponible = 0, En_Convalescence = 1, Hors_d_etat = 2 };
         public string Name { get; set; }
         protected int lifePoint { get; set; }
         protected _status Status { get; set; }
@@ -29,19 +29,45 @@ namespace Catcheur_Manager.Models
             Status = status;
         }
 
-        public void hit (Wrestler wrestler1, Wrestler wrestler2)
+        private void hit(Wrestler opponent)
         {
-            wrestler2.lifePoint -= wrestler1.attackPoint;
+            opponent.lifePoint -= attackPoint;
+            Console.WriteLine($"{Name} attaque ! ");
 
         }
 
-        public void block(Wrestler wrestler1, Wrestler wrestler2)
+        private void block(Wrestler opponent)
         {
-            wrestler2.attackPoint -= wrestler1.defensePoint;
+            opponent.attackPoint -= defensePoint;
+            Console.WriteLine($"{Name} se défend ! ");
+
         }
 
-        public void specialAttack()
+        private void specialAttack()
         {
+            Console.WriteLine($"{Name} fait son attaque spécial ! ");
+
+        }
+
+        public void ChooseAction(Wrestler opponent)
+        {
+            Random rnd = new Random();
+            int rand = rnd.Next(0, 3);
+
+            switch (rand)
+            {
+                case 0:
+                    hit(opponent);
+                    break;
+
+                case 1:
+                    block(opponent);
+                    break;
+
+                case 2:
+                    specialAttack();
+                    break;
+            }
 
         }
 
@@ -63,7 +89,7 @@ namespace Catcheur_Manager.Models
             string res = "";
             for (int i = 0; i < ContactList.Count; i++)
             {
-                res = $"{i+1}. ";
+                res = $"{i + 1}. ";
 
                 switch ((short)ContactList[i].Status)
                 {
@@ -112,6 +138,6 @@ namespace Catcheur_Manager.Models
             isSelected = false;
         }
 
-        
+
     }
 }
