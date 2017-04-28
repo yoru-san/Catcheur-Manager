@@ -106,15 +106,10 @@ namespace Catcheur_Manager.Models
             {
                 Console.WriteLine($"Le combat est fini en {Iteration} round ! Bravo !");
                 timer.Enabled = false;
+                isEnd = true;
+                isReady = false;
             }
 
-        }
-    }
-}
-                Iteration++;
-            }
-            isEnd = true;
-            isReady = false;
         }
     }
 }
