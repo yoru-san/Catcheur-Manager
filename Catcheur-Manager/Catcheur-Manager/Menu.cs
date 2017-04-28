@@ -100,7 +100,7 @@ namespace Catcheur_Manager
             while (!end)
             {
                 Console.Clear();
-                Console.WriteLine($"{player.Name}\n\nBénéfices: {player.Money}\tSaison {player.CurrentSeason.id} - Match {Match.idNum}\n\n0. -> Créer le match de samedi prochain\n"+ 
+                Console.WriteLine($"{player.Name}\n\nBénéfices: {player.Money}\tSaison {player.CurrentSeason.id} - Match {player.getCurrentMatch().id}\n\n0. -> Créer le match de samedi prochain\n"+ 
                     $"1. -> Consulter l'historique des matchs\n2. -> Consulter la base des contacts\n3. -> Changer de personnage\n4. -> Quitter le jeu\n5 -> Supprimer le personnage");
 
                 choix = MenuIntParse(0, 5);

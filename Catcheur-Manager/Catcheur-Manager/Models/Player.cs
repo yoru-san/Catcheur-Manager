@@ -11,6 +11,7 @@ namespace Catcheur_Manager.Models
     [XmlInclude(typeof(Player))]
     public class Player
     {
+        public int SeasonId { get; set; }
         public int Money { get; set; }
 
         public string Name { get; set; }
@@ -33,6 +34,7 @@ namespace Catcheur_Manager.Models
         {
             Name = name;
             Money = 0;
+            SeasonId = 1;
             SeasonHistory = new List<Season>();
             SeasonHistory.Add(new Season(this));
             CurrentSeason = SeasonHistory[0];

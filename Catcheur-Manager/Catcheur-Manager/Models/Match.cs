@@ -12,7 +12,6 @@ namespace Catcheur_Manager.Models
     [XmlInclude(typeof(Match))]
     public class Match
     {
-        public static int idNum { get; set; } = 1;
 
         public int id { get; set; }
 
@@ -31,8 +30,8 @@ namespace Catcheur_Manager.Models
 
         public bool isEnd { get; set; }
 
-        [XmlIgnore]
-        public Season MatchSeason { get; set; }
+        
+        public int MatchSeason { get; set; }
 
         public Match()
         {
@@ -41,12 +40,11 @@ namespace Catcheur_Manager.Models
 
         public Match(Season currentSeason)
         {
-            id = idNum;
-            idNum++;
+            id = 0;
             isReady = false;
             isEnd = true;
 
-            MatchSeason = currentSeason;
+            MatchSeason = currentSeason.id;
             currentSeason.CurrentMatch = this;
         }
 
@@ -63,15 +61,15 @@ namespace Catcheur_Manager.Models
 
         public Match(Wrestler wres1, Wrestler wres2, Season currentSeason)
         {
-            id = idNum;
-            idNum++;
+            id = currentSeason.MatchId;
+            currentSeason.MatchId++;
             isReady = true;
             isEnd = false;
 
             Iteration = 0;
             IterationMax = 20;
 
-            MatchSeason = currentSeason;
+            MatchSeason = currentSeason.id;
             currentSeason.CurrentMatch = this;
             currentSeason.MatchHistory.Add(this);
 
@@ -84,7 +82,7 @@ namespace Catcheur_Manager.Models
         public void Start()
         {
             timer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
-            timer.Interval = 2000;
+            timer.Interval = 20;
             timer.Enabled = true;
             Console.WriteLine("coucou");
         }
@@ -118,6 +116,13 @@ namespace Catcheur_Manager.Models
                 isReady = false;
             }
 
+        }
+
+        public override string ToString()
+        {
+            string res = $"Saison {MatchSeason} - Match n°{id}:\nParticipants: {FirstWrestler}, {SecondWrestler}\n\nVainqueur:\t{Winner} par {WayOfWinning}\nNombre de rounds\t{Iteration}";
+
+            return base.ToString();
         }
     }
 }

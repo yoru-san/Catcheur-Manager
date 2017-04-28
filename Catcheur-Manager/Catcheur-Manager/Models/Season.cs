@@ -10,14 +10,17 @@ namespace Catcheur_Manager.Models
     [XmlInclude(typeof(Season))]
     public class Season
     {
-        static int idNum = 1;
+        
 
         public int id { get; set; }
+
+        public int MatchId { get; set; }
         public int Profit { get; set; }
 
         public Match CurrentMatch { get; set; }
 
         public List<Match> MatchHistory { get; set; }
+
 
         public int Rate { get; set; }
         public Season()
@@ -27,17 +30,13 @@ namespace Catcheur_Manager.Models
 
         public Season(Player player)
         {
-            id = idNum;
-            idNum++;
+            id = player.SeasonId;
+            player.SeasonId ++;
+            MatchId = 1;
 
             MatchHistory = new List<Match>();
             CurrentMatch = new Match(this);
-
-            
-
             Profit = 0;
-
-            Match.idNum = 1;
         }
     }
 
