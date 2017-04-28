@@ -5,10 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using Catcheur_Manager.Models;
 using System.Timers;
+using System.Xml.Serialization;
 
 namespace Catcheur_Manager.Models
 {
-    class Match
+    [XmlInclude(typeof(Match))]
+    public class Match
     {
         public static int idNum { get; set; } = 1;
 
@@ -29,7 +31,13 @@ namespace Catcheur_Manager.Models
 
         public bool isEnd { get; set; }
 
+        [XmlIgnore]
         public Season MatchSeason { get; set; }
+
+        public Match()
+        {
+            //XML only
+        }
 
         public Match(Season currentSeason)
         {

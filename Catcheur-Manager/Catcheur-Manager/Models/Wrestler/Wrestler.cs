@@ -3,10 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace Catcheur_Manager.Models
 {
-    abstract class Wrestler
+    [XmlInclude(typeof(Wrestler))]
+    [XmlInclude(typeof(Wrestler_Agile))]
+    [XmlInclude(typeof(Wrestler_Brute))]
+    public abstract class Wrestler
     {
         
 
@@ -22,6 +26,11 @@ namespace Catcheur_Manager.Models
         public string specialDesc { get; set; }
 
         public bool isSelected { get; set; }
+
+        public Wrestler()
+        {
+            //XML only
+        }
 
         public Wrestler(string name, _status status, Player player)
         {

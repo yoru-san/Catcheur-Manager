@@ -3,11 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace Catcheur_Manager.Models
 {
-    class Wrestler_Brute : Wrestler
+    
+    public class Wrestler_Brute : Wrestler
     {
+        public Wrestler_Brute()
+        {
+            //XML only
+        }
 
         public Wrestler_Brute(string name, _status status, Player player) : base(name, status, player)
         {

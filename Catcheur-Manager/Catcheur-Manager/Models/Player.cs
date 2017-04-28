@@ -1,34 +1,47 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace Catcheur_Manager.Models
 {
-    class Player
+    [XmlInclude(typeof(Player))]
+    public class Player
     {
         public int Money { get; set; }
 
         public string Name { get; set; }
 
-        public List<Wrestler> ContactList { get; protected set; }
+        public List<Wrestler> ContactList { get; set; }
 
         public Season CurrentSeason { get; set; }
 
         public List<Season> SeasonHistory;
+
+        
+        public static List<Player> PlayerList { get; set; } = new List<Player>();
+
+        public Player()
+        {
+            //XML only
+        }
 
         public Player(string name)
         {
             Name = name;
             Money = 0;
             SeasonHistory = new List<Season>();
-            SeasonHistory.Add(new Season());
+            SeasonHistory.Add(new Season(this));
             CurrentSeason = SeasonHistory[0];
             ContactList = new List<Wrestler>();
 
             generateBaseContacts();
+            PlayerList.Add(this);
 
+            SerializePlayers();
 
             Menu.MenuPlayer(this);
             
@@ -101,5 +114,37 @@ namespace Catcheur_Manager.Models
             return CurrentSeason.CurrentMatch;
         }
 
+        public override string ToString()
+        {
+            //Osef
+            return base.ToString();
+        }
+
+        public void Delete()
+        {
+            PlayerList.Remove(this);
+            SerializePlayers();
+        }
+
+        public static void SerializePlayers()
+        {
+            XmlSerializer serializer = new XmlSerializer(typeof(List<Player>));
+            using (StreamWriter wr = new StreamWriter("players.xml"))
+            {
+                serializer.Serialize(wr, PlayerList);
+            }
+        }
+
+        public static void DeserializePlayers()
+        {
+            XmlSerializer serializer = new XmlSerializer(typeof(List<Player>));
+            using (StreamReader rd = new StreamReader("players.xml"))
+            {
+                PlayerList = serializer.Deserialize(rd) as List<Player>;
+            }
+
+        }
     }
+
+
 }
