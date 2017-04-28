@@ -10,16 +10,37 @@ namespace Catcheur_Manager.Models
 {
     class Match
     {
+        public static int idNum { get; set; } = 1;
+
+        public int id { get; set; }
+
         protected int Iteration {get; set; }
         protected int IterationMax { get; set; }
-        protected Wrestler FirstWrestler { get; set; }
-        protected Wrestler SecondWrestler { get; set; }
+        public Wrestler FirstWrestler { get; set; }
+        public Wrestler SecondWrestler { get; set; }
         public Wrestler Winner { get; set; }
         public Wrestler Loser { get; set; }
         public bool WayOfWinning { get; set; }
         public int Profit { get; set; }
         private Random Rnd;
         private Timer timer;
+
+        public bool isReady { get; set; }
+
+        public bool isEnd { get; set; }
+
+        public Season MatchSeason { get; set; }
+
+        public Match(Season currentSeason)
+        {
+            id = idNum;
+            idNum++;
+            isReady = false;
+            isEnd = true;
+
+            MatchSeason = currentSeason;
+            currentSeason.CurrentMatch = this;
+        }
 
         public Match(int iteration, Wrestler firstWrestler, Wrestler secondWrestler, Wrestler winner, Wrestler loser, bool wayOfWinning, int profit)
         {
@@ -32,10 +53,20 @@ namespace Catcheur_Manager.Models
             Profit = profit;
         }
 
-        public Match(Wrestler wres1, Wrestler wres2)
+        public Match(Wrestler wres1, Wrestler wres2, Season currentSeason)
         {
+            id = idNum;
+            idNum++;
+            isReady = true;
+            isEnd = false;
+
             Iteration = 0;
-            IterationMax = 19;
+            IterationMax = 20;
+
+            MatchSeason = currentSeason;
+            currentSeason.CurrentMatch = this;
+            currentSeason.MatchHistory.Add(this);
+
             FirstWrestler = wres1;
             SecondWrestler = wres2;
             Rnd = new Random();
@@ -78,6 +109,13 @@ namespace Catcheur_Manager.Models
                 timer.Enabled = false;
             }
 
+        }
+    }
+}
+                Iteration++;
+            }
+            isEnd = true;
+            isReady = false;
         }
     }
 }

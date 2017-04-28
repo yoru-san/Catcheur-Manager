@@ -8,15 +8,29 @@ namespace Catcheur_Manager.Models
 {
     class Season
     {
+        static int idNum = 1;
+
+        public int id { get; set; }
         public int Profit { get; set; }
         public Match CurrentMatch { get; set; }
+
+        public List<Match> MatchHistory { get; set; }
+
         public int Rate { get; set; }
 
-        public Season(int profit, Match currentMatch, int rate)
+        public Season()
         {
-            Profit = profit;
-            CurrentMatch = currentMatch;
-            Rate = rate;
+            id = idNum;
+            idNum++;
+
+            MatchHistory = new List<Match>();
+            CurrentMatch = new Match(this);
+
+            
+
+            Profit = 0;
+
+            Match.idNum = 1;
         }
     }
 

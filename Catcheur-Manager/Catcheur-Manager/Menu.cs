@@ -43,19 +43,21 @@ namespace Catcheur_Manager
 
             while (!end)
             {
-                Console.WriteLine($"{player.Name}\n\nBénéfices: {player.Money}\n\n0. -> Créer le match de samedi prochain\n1. -> Consulter l'historique des matchs\n2. -> Consulter la base des contacts\n3. -> Quitter le jeu\n");
+                Console.Clear();
+                Console.WriteLine($"{player.Name}\n\nBénéfices: {player.Money}\tSaison {player.CurrentSeason.id} - Match {Match.idNum}\n\n0. -> Créer le match de samedi prochain\n1. -> Consulter l'historique des matchs\n2. -> Consulter la base des contacts\n3. -> Quitter le jeu\n");
 
                 choix = MenuIntParse(0, 3);
 
                 switch (choix)
                 {
                     case 0:
-                        MenuMatch();
+                        MenuMatch(player);
                         break;
                     case 1:
+                        MenuHistory(player);
                         break;
                     case 2:
-                        MenuList();
+                        MenuList(player);
                         break;
                     case 3:
                         end = true;
@@ -66,22 +68,18 @@ namespace Catcheur_Manager
 
         }
 
-        public static void MenuList()
+        public static void MenuList(Player player)
         {
-            Console.Clear();
-            
-
-            
-
             bool end = false;
             int choix = -1;
 
             while (!end)
             {
+                Console.Clear();
                 Console.WriteLine("Liste des contacts: \n\n0 -> Quitter");
-                Wrestler.printContactList(Wrestler.ContactList);
+                player.printContactList(player.ContactList);
 
-                choix = MenuIntParse(0, Wrestler.ContactList.Count);
+                choix = MenuIntParse(0, player.ContactList.Count);
 
                 switch (choix)
                 {
@@ -100,75 +98,111 @@ namespace Catcheur_Manager
 
         }
 
-        public static void MenuMatch()
+        public static void MenuMatch(Player player)
         {
-            bool end = false;
-            int choix = -1;
-            Wrestler wres1;
-            Wrestler wres2;
-            
-            
+            Console.Clear();
 
-            while (!end)
+            if (player.getCurrentMatch().isEnd)
             {
-                //Console.Clear();
-                Console.WriteLine("Création du match de samedi soir: \nSélectionnez deux catcheurs parmis la liste:\nPremier catcheur:\n\n0 -> Quitter");
-                Wrestler.printContactList(Wrestler.getAvailableWrestler());
+                bool end = false;
+                int choix = -1;
+                Wrestler wres1;
+                Wrestler wres2;
 
-                choix = MenuIntParse(0, Wrestler.getAvailableWrestler().Count());
 
-                if(choix != 0)
+
+                while (!end)
                 {
-                    wres1 = Wrestler.SelectWrestler(choix - 1);
+
                     Console.Clear();
-                    choix = 0;
-                    
-                    Console.WriteLine($"Création du match de samedi soir: \nSélectionnez deux catcheurs parmis la liste:\nPremier catcheur: {wres1.Name}\nSecond catcheur:\n\n0 -> Quitter");
-                    Wrestler.printContactList(Wrestler.getAvailableWrestler());
-                    choix = MenuIntParse(0, Wrestler.getAvailableWrestler().Count());
+                    Console.WriteLine("Création du match de samedi soir: \nSélectionnez deux catcheurs parmis la liste:\nPremier catcheur:\n\n0 -> Quitter");
+                    player.printContactList(player.getAvailableWrestler());
+
+                    choix = MenuIntParse(0, player.getAvailableWrestler().Count());
 
                     if (choix != 0)
                     {
-                        wres2 = Wrestler.SelectWrestler(choix - 1);
+                        wres1 = player.SelectWrestler(choix - 1);
+                        Console.Clear();
+                        choix = 0;
 
-                        Console.WriteLine($"Catcheurs sélectionnés: {wres1.Name} et {wres2.Name}\nConfirmer?\t0 -> Oui\t1 -> Non");
-                        choix = MenuIntParse(0, 1);
+                        Console.WriteLine($"Création du match de samedi soir: \nSélectionnez deux catcheurs parmis la liste:\nPremier catcheur: {wres1.Name}\nSecond catcheur:\n\n0 -> Quitter");
+                        player.printContactList(player.getAvailableWrestler());
+                        choix = MenuIntParse(0, player.getAvailableWrestler().Count());
 
-                        if (choix == 0)
+                        if (choix != 0)
                         {
-                            Match newMatch = new Match(wres1, wres2);
-                            newMatch.Start();
-                            
+                            wres2 = player.SelectWrestler(choix - 1);
+
+                            Console.WriteLine($"Catcheurs sélectionnés: {wres1.Name} et {wres2.Name}\nConfirmer?\t0 -> Oui\t1 -> Non");
+                            choix = MenuIntParse(0, 1);
+
+                            if (choix == 0)
+                            {
+                                new Match(wres1, wres2, player.CurrentSeason);
+                                end = true;
+                            }
+                            else
+                            {
+                                wres1.UnselectWrestler();
+                                wres2.UnselectWrestler();
+                            }
                         }
                         else
                         {
                             wres1.UnselectWrestler();
-                            wres2.UnselectWrestler();
+                            end = true;
                         }
-                        
                     }
                     else
                     {
-                        wres1.UnselectWrestler();
+
                         end = true;
                     }
                 }
-                else
-                {
-                    
-                    end = true;
-                }
-
-
-
-
             }
+
+            if (!player.getCurrentMatch().isEnd)
+            {
+                MenuMatchLaunch(player.getCurrentMatch());
+            }
+
+
 
         }
 
+        public static void MenuMatchLaunch(Match match)
+        {
+            Console.Clear();
+            Console.WriteLine($"Voulez vous lancer le match opposant {match.FirstWrestler.Name} à {match.SecondWrestler.Name} maintenant?\n\n{match.FirstWrestler.ToString()}\n\n{match.SecondWrestler.ToString()}\n\n0 -> Oui\t1 -> Non");
+            if (!MenuTORChoice())
+            {
+                match.FirstWrestler.UnselectWrestler();
+                match.SecondWrestler.UnselectWrestler();
+
+
+                match.Start();
+                    
+            }
 
 
 
+        }
+
+        public static void MenuHistory(Player player)
+        {
+            Console.Clear();
+            Console.WriteLine("Historique des matchs:\n\n");
+            foreach (Season season in player.SeasonHistory)
+            {
+                Console.WriteLine($"Saison {season.id}: ");
+                foreach (Match match in season.MatchHistory)
+                {
+                    Console.WriteLine($"\t{match.ToString()}");
+                }
+            }
+            Console.ReadLine();
+        }
 
         static int MenuIntParse(int min, int max)
         {
@@ -196,8 +230,23 @@ namespace Catcheur_Manager
 
         }
 
+        static bool MenuTORChoice()
+        {
+            if (MenuIntParse(0, 1) == 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+            
+        }
 
     }
+
+
+
     class Choix
     {
 

@@ -9,14 +9,14 @@ namespace Catcheur_Manager.Models
     class Wrestler_Agile : Wrestler
     {
 
-        public Wrestler_Agile(string name, _status status): base(name, status)
+        public Wrestler_Agile(string name, _status status, Player player): base(name, status, player)
         {
             lifePoint = 125;
             attackPoint = 3;
             defensePoint = 3;
 
-            ContactList.Add(this);
-            orderContactList();
+            player.ContactList.Add(this);
+            player.orderContactList();
         }
 
     }
