@@ -81,7 +81,6 @@ namespace Catcheur_Manager.Models
             timer = new Timer();
         }
 
-        //A REVOIR AVEC LE PROF !
         public void Start()
         {
             timer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
