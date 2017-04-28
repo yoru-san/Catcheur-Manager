@@ -16,11 +16,15 @@ namespace Catcheur_Manager.Models
 
         public Season CurrentSeason { get; set; }
 
+        public List<Season> SeasonHistory;
+
         public Player(string name)
         {
             Name = name;
             Money = 0;
-            CurrentSeason = new Season();
+            SeasonHistory = new List<Season>();
+            SeasonHistory.Add(new Season());
+            CurrentSeason = SeasonHistory[0];
             ContactList = new List<Wrestler>();
 
             generateBaseContacts();
@@ -90,6 +94,11 @@ namespace Catcheur_Manager.Models
             selectedWrestler.isSelected = true;
             return selectedWrestler;
 
+        }
+
+        public Match getCurrentMatch()
+        {
+            return CurrentSeason.CurrentMatch;
         }
 
     }

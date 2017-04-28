@@ -23,9 +23,10 @@ namespace Catcheur_Manager.Models
             id = idNum;
             idNum++;
 
-            CurrentMatch = new Match(); //Placebo
-
             MatchHistory = new List<Match>();
+            CurrentMatch = new Match(this);
+
+            
 
             Profit = 0;
 

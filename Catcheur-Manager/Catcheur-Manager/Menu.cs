@@ -11,6 +11,7 @@ namespace Catcheur_Manager
     {
         public static void MenuStart()
         {
+            Console.Clear();
             bool end = false;
             Console.Write("Bienvenue dans Catch Manager!\n");
             int choix = -1;
@@ -38,12 +39,14 @@ namespace Catcheur_Manager
 
         public static void MenuPlayer(Player player)
         {
+
             bool end = false;
             int choix = -1;
 
             while (!end)
             {
-                Console.WriteLine($"{player.Name}\n\nBénéfices: {player.Money}\n\n0. -> Créer le match de samedi prochain\n1. -> Consulter l'historique des matchs\n2. -> Consulter la base des contacts\n3. -> Quitter le jeu\n");
+                Console.Clear();
+                Console.WriteLine($"{player.Name}\n\nBénéfices: {player.Money}\tSaison {player.CurrentSeason.id} - Match {Match.idNum}\n\n0. -> Créer le match de samedi prochain\n1. -> Consulter l'historique des matchs\n2. -> Consulter la base des contacts\n3. -> Quitter le jeu\n");
 
                 choix = MenuIntParse(0, 3);
 
@@ -53,6 +56,7 @@ namespace Catcheur_Manager
                         MenuMatch(player);
                         break;
                     case 1:
+                        MenuHistory(player);
                         break;
                     case 2:
                         MenuList(player);
@@ -68,16 +72,12 @@ namespace Catcheur_Manager
 
         public static void MenuList(Player player)
         {
-            Console.Clear();
-            
-
-            
-
             bool end = false;
             int choix = -1;
 
             while (!end)
             {
+                Console.Clear();
                 Console.WriteLine("Liste des contacts: \n\n0 -> Quitter");
                 player.printContactList(player.ContactList);
 
@@ -102,11 +102,9 @@ namespace Catcheur_Manager
 
         public static void MenuMatch(Player player)
         {
-            if (!player.CurrentSeason.CurrentMatch.isEnd)
-            {
-                MenuMatchLaunch();
-            }
-            else
+            Console.Clear();
+
+            if (player.getCurrentMatch().isEnd)
             {
                 bool end = false;
                 int choix = -1;
@@ -166,18 +164,47 @@ namespace Catcheur_Manager
                 }
             }
 
+            if (!player.getCurrentMatch().isEnd)
+            {
+                MenuMatchLaunch(player.getCurrentMatch());
+            }
+
 
 
         }
 
-        public static void MenuMatchLaunch()
+        public static void MenuMatchLaunch(Match match)
         {
+            Console.Clear();
+            Console.WriteLine($"Voulez vous lancer le match opposant {match.FirstWrestler.Name} à {match.SecondWrestler.Name} maintenant?\n\n{match.FirstWrestler.ToString()}\n\n{match.SecondWrestler.ToString()}\n\n0 -> Oui\t1 -> Non");
+            if (!MenuTORChoice())
+            {
+                match.FirstWrestler.UnselectWrestler();
+                match.SecondWrestler.UnselectWrestler();
+
+
+                match.Start();
+                    
+            }
+
+
 
         }
 
-
-
-
+        public static void MenuHistory(Player player)
+        {
+            Console.Clear();
+            Console.WriteLine("Historique des matchs:\n\n");
+            foreach (Season season in player.SeasonHistory)
+            {
+                Console.WriteLine($"Saison {season.id}: ");
+                foreach (Match match in season.MatchHistory)
+                {
+                    Console.WriteLine($"\t{match.ToString()}");
+                }
+            }
+            Console.ReadLine();
+        }
 
         static int MenuIntParse(int min, int max)
         {
@@ -205,8 +232,23 @@ namespace Catcheur_Manager
 
         }
 
+        static bool MenuTORChoice()
+        {
+            if (MenuIntParse(0, 1) == 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+            
+        }
 
     }
+
+
+
     class Choix
     {
 
