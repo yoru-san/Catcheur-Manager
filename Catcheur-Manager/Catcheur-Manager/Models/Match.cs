@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Catcheur_Manager.Models;
 using System.Timers;
 using System.Xml.Serialization;
+using System.Diagnostics;
 
 namespace Catcheur_Manager.Models
 {
@@ -78,13 +79,36 @@ namespace Catcheur_Manager.Models
             timer = new Timer();
         }
 
-       
+       public void ChooseBeginner()
+        {
+            Random rnd = new Random();
+            int rand = rnd.Next(0, 2);
+
+            if (rand == 0)
+            {
+                Console.WriteLine($"C'est {FirstWrestler.Name} qui engage le combat !");
+                WrestlerRound = FirstWrestler;
+            }
+            else
+            {
+                Console.WriteLine($"C'est {SecondWrestler.Name} qui commence le combat !");
+                WrestlerRound = SecondWrestler;
+            }
+        }
 
         public void Start()
         {
+            ChooseBeginner();
             timer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
-            timer.Interval = 20;
+            timer.Interval = 2000;
             timer.Enabled = true;
+
+            while(isEnd)
+            {
+                Debug.WriteLine("Match toujours en cours...");
+            }
+
+            Console.ReadLine();
         }
 
         private void OnTimedEvent(object source, ElapsedEventArgs e)
