@@ -7,12 +7,54 @@ using Catcheur_Manager.Models;
 
 namespace Catcheur_Manager
 {
-    class Menu
+
+    static class Menu
     {
         public static void MenuStart()
         {
+            Console.Write("Bienvenue dans Catcheur Manager!\n");
+
+            if (Player.PlayerList.Count == 0)
+            {
+                MenuNewPlayer();
+            }
+            else
+            {
+                bool end = false;
+                int choix = -1;
+
+                while (!end)
+                {
+                    Console.WriteLine("Sélectionnez un joueur\n\n0 -> Nouveau joueur\n");
+                    for (int i = 0; i < Player.PlayerList.Count; i++)
+                    {
+                        Console.WriteLine($"{i+1}. {Player.PlayerList[i].Name}");
+                    }
+
+                    choix = MenuIntParse(0, Player.PlayerList.Count);
+
+                    if (choix == 0)
+                    {
+                        MenuNewPlayer();
+                    }
+                    else
+                    {
+                        if (MenuPlayer(Player.PlayerList[choix - 1]))
+                        {
+                            end = true;
+                        }
+                    }
+                }
+
+            }
+            
+
+        }
+
+        public static void MenuNewPlayer()
+        {
             bool end = false;
-            Console.Write("Bienvenue dans Catch Manager!\n");
+            
             int choix = -1;
 
             string name = "";
@@ -33,20 +75,35 @@ namespace Catcheur_Manager
 
             Console.Clear();
             Player player = new Player(name);
-
         }
 
-        public static void MenuPlayer(Player player)
+        public static void MenuDeletePlayer(Player player)
+        {
+            Console.WriteLine($"Suppression de personnage\n\n/!\\ Voulez vous vraiment supprimer le personnage {player.Name}? /!\\\n0 -> Oui\t1 -> Non");
+            if (!MenuTORChoice())
+            {
+                Console.WriteLine("C'est votre dernier mot?\nn0 -> Oui\t1 -> Non");
+                if (!MenuTORChoice())
+                {
+                    player.Delete();
+                }
+                
+            }
+        }
+
+        public static bool MenuPlayer(Player player)
         {
             bool end = false;
             int choix = -1;
+            bool res = false;
 
             while (!end)
             {
                 Console.Clear();
-                Console.WriteLine($"{player.Name}\n\nBénéfices: {player.Money}\tSaison {player.CurrentSeason.id} - Match {Match.idNum}\n\n0. -> Créer le match de samedi prochain\n1. -> Consulter l'historique des matchs\n2. -> Consulter la base des contacts\n3. -> Quitter le jeu\n");
+                Console.WriteLine($"{player.Name}\n\nBénéfices: {player.Money}\tSaison {player.CurrentSeason.id} - Match {player.getCurrentMatch().id}\n\n0. -> Créer le match de samedi prochain\n"+ 
+                    $"1. -> Consulter l'historique des matchs\n2. -> Consulter la base des contacts\n3. -> Changer de personnage\n4. -> Quitter le jeu\n5 -> Supprimer le personnage");
 
-                choix = MenuIntParse(0, 3);
+                choix = MenuIntParse(0, 5);
 
                 switch (choix)
                 {
@@ -60,10 +117,25 @@ namespace Catcheur_Manager
                         MenuList(player);
                         break;
                     case 3:
+                        Console.Clear();
                         end = true;
+                        res = false;
+                        break;
+                    case 4:
+                        Console.Clear();
+                        end = true;
+                        res = true;
+                        break;
+                    case 5:
+                        MenuDeletePlayer(player);
+                        end = true;
+                        res = false;
                         break;
                 }
+                
             }
+            return res;
+
 
 
         }

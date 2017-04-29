@@ -5,12 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Catcheur_Manager.Models;
 using System.Timers;
+using System.Xml.Serialization;
 
 namespace Catcheur_Manager.Models
 {
-    class Match
+    [XmlInclude(typeof(Match))]
+    public class Match
     {
-        public static int idNum { get; set; } = 1;
 
         public int id { get; set; }
 
@@ -29,16 +30,21 @@ namespace Catcheur_Manager.Models
 
         public bool isEnd { get; set; }
 
-        public Season MatchSeason { get; set; }
+        
+        public int MatchSeason { get; set; }
+
+        public Match()
+        {
+            //XML only
+        }
 
         public Match(Season currentSeason)
         {
-            id = idNum;
-            idNum++;
+            id = 0;
             isReady = false;
             isEnd = true;
 
-            MatchSeason = currentSeason;
+            MatchSeason = currentSeason.id;
             currentSeason.CurrentMatch = this;
         }
 
@@ -55,15 +61,15 @@ namespace Catcheur_Manager.Models
 
         public Match(Wrestler wres1, Wrestler wres2, Season currentSeason)
         {
-            id = idNum;
-            idNum++;
+            id = currentSeason.MatchId;
+            currentSeason.MatchId++;
             isReady = true;
             isEnd = false;
 
             Iteration = 0;
-            IterationMax = 3;
+            IterationMax = 20;
 
-            MatchSeason = currentSeason;
+            MatchSeason = currentSeason.id;
             currentSeason.CurrentMatch = this;
             currentSeason.MatchHistory.Add(this);
 
@@ -77,7 +83,7 @@ namespace Catcheur_Manager.Models
         public void Start()
         {
             timer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
-            timer.Interval = 2000;
+            timer.Interval = 20;
             timer.Enabled = true;
         }
 
@@ -110,7 +116,14 @@ namespace Catcheur_Manager.Models
                 isEnd = true;
                 isReady = false;
             }
+
         }
 
+        public override string ToString()
+        {
+            string res = $"Saison {MatchSeason} - Match n°{id}:\nParticipants: {FirstWrestler}, {SecondWrestler}\n\nVainqueur:\t{Winner} par {WayOfWinning}\nNombre de rounds\t{Iteration}";
+
+            return base.ToString();
+        }
     }
 }
