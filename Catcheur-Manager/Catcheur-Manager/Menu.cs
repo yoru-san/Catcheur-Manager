@@ -252,8 +252,8 @@ namespace Catcheur_Manager
                 match.FirstWrestler.UnselectWrestler();
                 match.SecondWrestler.UnselectWrestler();
 
-
                 match.Start();
+
                     
             }
 

@@ -15,15 +15,15 @@ namespace Catcheur_Manager.Models
 
         public int id { get; set; }
 
-        protected int Iteration {get; set; }
+        public int Iteration { get; set; }
         protected int IterationMax { get; set; }
         public Wrestler FirstWrestler { get; set; }
         public Wrestler SecondWrestler { get; set; }
+        public Wrestler WrestlerRound { get; set; }
         public Wrestler Winner { get; set; }
         public Wrestler Loser { get; set; }
         public bool WayOfWinning { get; set; }
         public int Profit { get; set; }
-        private Random Rnd;
         private Timer timer;
 
         public bool isReady { get; set; }
@@ -75,43 +75,44 @@ namespace Catcheur_Manager.Models
 
             FirstWrestler = wres1;
             SecondWrestler = wres2;
-            Rnd = new Random();
             timer = new Timer();
         }
+
+       
 
         public void Start()
         {
             timer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
             timer.Interval = 20;
             timer.Enabled = true;
-            Console.WriteLine("coucou");
         }
 
         private void OnTimedEvent(object source, ElapsedEventArgs e)
         {
-            if (Iteration <= IterationMax)
+            if (Iteration < IterationMax)
             {
-                int rand = Rnd.Next(0, 2);
+                Console.WriteLine($"Round #{Iteration}");
 
-                switch (rand)
+                if (WrestlerRound == null || WrestlerRound == FirstWrestler)
                 {
-                    case 0:
-                        Console.WriteLine($"C'est {FirstWrestler.Name} qui commence !");
-                        FirstWrestler.ChooseAction(SecondWrestler);
-                        break;
-                    case 1:
-                        Console.WriteLine($"C'est {SecondWrestler.Name} qui engage le combat !");
-                        SecondWrestler.ChooseAction(FirstWrestler);
-                        break;
+                    Console.WriteLine($"C'est au tour de {FirstWrestler.Name} !");
+                    FirstWrestler.ChooseAction(SecondWrestler);
+                    WrestlerRound = SecondWrestler;
+                }
+                else
+                {
+                    Console.WriteLine($"C'est au tour de {SecondWrestler.Name} !");
+                    SecondWrestler.ChooseAction(FirstWrestler);
+                    WrestlerRound = FirstWrestler;
                 }
 
                 Iteration++;
             }
-
             else
             {
                 Console.WriteLine($"Le combat est fini en {Iteration} round ! Bravo !");
                 timer.Enabled = false;
+                timer.Close();
                 isEnd = true;
                 isReady = false;
             }

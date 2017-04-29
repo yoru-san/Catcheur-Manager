@@ -80,6 +80,7 @@ namespace Catcheur_Manager.Models
 
         }
 
+
         public void UnselectWrestler()
         {
             isSelected = false;
