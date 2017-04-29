@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfPlayer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Player>
+    <SeasonHistory>
+      <Season>
+        <id>1</id>
+        <MatchId>0</MatchId>
+        <Profit>0</Profit>
+        <CurrentMatch>
+          <id>1</id>
+          <WayOfWinning>false</WayOfWinning>
+          <Profit>0</Profit>
+          <isReady>false</isReady>
+          <isEnd>true</isEnd>
+        </CurrentMatch>
+        <MatchHistory />
+        <Rate>0</Rate>
+      </Season>
+    </SeasonHistory>
+    <SeasonId>0</SeasonId>
+    <Money>0</Money>
+    <Name>Céline</Name>
+    <ContactList>
+      <Wrestler xsi:type="Wrestler_Agile">
+        <Name>Dead Poule</Name>
+        <lifePoint>125</lifePoint>
+        <Status>Disponible</Status>
+        <attackPoint>3</attackPoint>
+        <defensePoint>3</defensePoint>
+        <isSelected>false</isSelected>
+      </Wrestler>
+      <Wrestler xsi:type="Wrestler_Brute">
+        <Name>Judy Sunny</Name>
+        <lifePoint>100</lifePoint>
+        <Status>Disponible</Status>
+        <attackPoint>5</attackPoint>
+        <defensePoint>1</defensePoint>
+        <isSelected>false</isSelected>
+      </Wrestler>
+      <Wrestler xsi:type="Wrestler_Agile">
+        <Name>Triple Hache</Name>
+        <lifePoint>125</lifePoint>
+        <Status>Disponible</Status>
+        <attackPoint>3</attackPoint>
+        <defensePoint>3</defensePoint>
+        <isSelected>false</isSelected>
+      </Wrestler>
+    </ContactList>
+    <CurrentSeason>
+      <id>1</id>
+      <MatchId>0</MatchId>
+      <Profit>0</Profit>
+      <CurrentMatch>
+        <id>1</id>
+        <WayOfWinning>false</WayOfWinning>
+        <Profit>0</Profit>
+        <isReady>false</isReady>
+        <isEnd>true</isEnd>
+      </CurrentMatch>
+      <MatchHistory />
+      <Rate>0</Rate>
+    </CurrentSeason>
+  </Player>
+  <Player>
+    <SeasonHistory>
+      <Season>
+        <id>1</id>
+        <MatchId>0</MatchId>
+        <Profit>0</Profit>
+        <CurrentMatch>
+          <id>1</id>
+          <WayOfWinning>false</WayOfWinning>
+          <Profit>0</Profit>
+          <isReady>false</isReady>
+          <isEnd>true</isEnd>
+        </CurrentMatch>
+        <MatchHistory />
+        <Rate>0</Rate>
+      </Season>
+    </SeasonHistory>
+    <SeasonId>0</SeasonId>
+    <Money>0</Money>
+    <Name>Henry de Lesquen</Name>
+    <ContactList>
+      <Wrestler xsi:type="Wrestler_Agile">
+        <Name>Dead Poule</Name>
+        <lifePoint>125</lifePoint>
+        <Status>Disponible</Status>
+        <attackPoint>3</attackPoint>
+        <defensePoint>3</defensePoint>
+        <isSelected>false</isSelected>
+      </Wrestler>
+      <Wrestler xsi:type="Wrestler_Brute">
+        <Name>Judy Sunny</Name>
+        <lifePoint>100</lifePoint>
+        <Status>Disponible</Status>
+        <attackPoint>5</attackPoint>
+        <defensePoint>1</defensePoint>
+        <isSelected>false</isSelected>
+      </Wrestler>
+      <Wrestler xsi:type="Wrestler_Agile">
+        <Name>Triple Hache</Name>
+        <lifePoint>125</lifePoint>
+        <Status>Disponible</Status>
+        <attackPoint>3</attackPoint>
+        <defensePoint>3</defensePoint>
+        <isSelected>false</isSelected>
+      </Wrestler>
+    </ContactList>
+    <CurrentSeason>
+      <id>1</id>
+      <MatchId>0</MatchId>
+      <Profit>0</Profit>
+      <CurrentMatch>
+        <id>1</id>
+        <WayOfWinning>false</WayOfWinning>
+        <Profit>0</Profit>
+        <isReady>false</isReady>
+        <isEnd>true</isEnd>
+      </CurrentMatch>
+      <MatchHistory />
+      <Rate>0</Rate>
+    </CurrentSeason>
+  </Player>
+  <Player>
+    <SeasonHistory>
+      <Season>
+        <id>1</id>
+        <MatchId>1</MatchId>
+        <Profit>0</Profit>
+        <CurrentMatch>
+          <id>0</id>
+          <WayOfWinning>false</WayOfWinning>
+          <Profit>0</Profit>
+          <isReady>false</isReady>
+          <isEnd>true</isEnd>
+        </CurrentMatch>
+        <MatchHistory />
+        <Rate>0</Rate>
+      </Season>
+    </SeasonHistory>
+    <SeasonId>2</SeasonId>
+    <Money>0</Money>
+    <Name>Azariel</Name>
+    <ContactList>
+      <Wrestler xsi:type="Wrestler_Agile">
+        <Name>Dead Poule</Name>
+        <lifePoint>125</lifePoint>
+        <Status>Disponible</Status>
+        <attackPoint>3</attackPoint>
+        <defensePoint>3</defensePoint>
+        <isSelected>false</isSelected>
+      </Wrestler>
+      <Wrestler xsi:type="Wrestler_Brute">
+        <Name>Judy Sunny</Name>
+        <lifePoint>100</lifePoint>
+        <Status>Disponible</Status>
+        <attackPoint>5</attackPoint>
+        <defensePoint>1</defensePoint>
+        <isSelected>false</isSelected>
+      </Wrestler>
+      <Wrestler xsi:type="Wrestler_Agile">
+        <Name>Triple Hache</Name>
+        <lifePoint>125</lifePoint>
+        <Status>Disponible</Status>
+        <attackPoint>3</attackPoint>
+        <defensePoint>3</defensePoint>
+        <isSelected>false</isSelected>
+      </Wrestler>
+    </ContactList>
+    <CurrentSeason>
+      <id>1</id>
+      <MatchId>1</MatchId>
+      <Profit>0</Profit>
+      <CurrentMatch>
+        <id>0</id>
+        <WayOfWinning>false</WayOfWinning>
+        <Profit>0</Profit>
+        <isReady>false</isReady>
+        <isEnd>true</isEnd>
+      </CurrentMatch>
+      <MatchHistory />
+      <Rate>0</Rate>
+    </CurrentSeason>
+  </Player>
+</ArrayOfPlayer>
