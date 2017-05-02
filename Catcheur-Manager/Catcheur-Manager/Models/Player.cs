@@ -137,7 +137,7 @@ namespace Catcheur_Manager.Models
             }
         }
 
-        /*public static void DeserializePlayers()
+        public static void DeserializePlayers()
         {
             XmlSerializer serializer = new XmlSerializer(typeof(List<Player>));
             using (StreamReader rd = new StreamReader("players.xml"))
@@ -145,7 +145,7 @@ namespace Catcheur_Manager.Models
                 PlayerList = serializer.Deserialize(rd) as List<Player>;
             }
 
-        }*/
+        }
     }
 
 

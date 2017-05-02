@@ -14,7 +14,7 @@ namespace Catcheur_Manager
         
         static void Main(string[] args)
         {
-            //Player.DeserializePlayers();
+            Player.DeserializePlayers();
             Menu.MenuStart();
 
         }

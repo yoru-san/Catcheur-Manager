@@ -82,7 +82,7 @@ namespace Catcheur_Manager
             Console.WriteLine($"Suppression de personnage\n\n/!\\ Voulez vous vraiment supprimer le personnage {player.Name}? /!\\\n0 -> Oui\t1 -> Non");
             if (!MenuTORChoice())
             {
-                Console.WriteLine("C'est votre dernier mot?\nn0 -> Oui\t1 -> Non");
+                Console.WriteLine("C'est votre dernier mot?\n0 -> Oui\t1 -> Non");
                 if (!MenuTORChoice())
                 {
                     player.Delete();
