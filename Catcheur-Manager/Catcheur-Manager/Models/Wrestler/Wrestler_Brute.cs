@@ -24,5 +24,10 @@ namespace Catcheur_Manager.Models
             player.ContactList.Add(this);
             player.orderContactList();
         }
+
+        public override string GetStringType()
+        {
+            return "Brute";
+        }
     }
 }

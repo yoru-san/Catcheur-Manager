@@ -25,5 +25,9 @@ namespace Catcheur_Manager.Models
             player.orderContactList();
         }
 
+        public override string GetStringType()
+        {
+            return "Agile";
+        }
     }
 }

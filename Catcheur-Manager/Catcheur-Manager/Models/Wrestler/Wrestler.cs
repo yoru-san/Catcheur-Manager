@@ -80,6 +80,23 @@ namespace Catcheur_Manager.Models
 
         }
 
+        public string GetStringStatus()
+        {
+            switch ((short)Status)
+            {
+                case 0:
+                    return "Disponible";
+                case 1:
+                    return"En convalescence";
+                case 2:
+                    return "Hors d'état";
+                default:
+                    return "0";
+            }
+        }
+
+        public abstract string GetStringType();
+
         public void CheckStatus(Wrestler opponent)
         {
  
@@ -108,6 +125,16 @@ namespace Catcheur_Manager.Models
         public void UnselectWrestler()
         {
             isSelected = false;
+        }
+
+        public override string ToString()
+        {
+            return $"{Name} :"
+                //+ {Description}
+                + $"\n\nStatut : {GetStringStatus()}\n"
+                + $"Points de vie:\t\t{lifePoint}\nPoints d'attaque:\t{attackPoint}\nPoints de défense:\t{defensePoint}\n"
+                //+ $"\nAttaque spéciale: {specialDesc}"
+                + "\n\n";
         }
 
 

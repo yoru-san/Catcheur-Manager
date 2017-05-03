@@ -64,39 +64,15 @@ namespace Catcheur_Manager.Models
         }
         public void printContactList(List<Wrestler> ContactList)
         {
-            string res = "";
+
             for (int i = 0; i < ContactList.Count; i++)
             {
-                res = $"{i + 1}. ";
-
-                switch ((short)ContactList[i].Status)
-                {
-                    case 0:
-                        res += "Disponible";
-                        break;
-                    case 1:
-                        res += "En convalescence";
-                        break;
-                    case 2:
-                        res += "Hors d'état";
-                        break;
-                }
-
-                if (ContactList[i].GetType() == typeof(Wrestler_Brute))
-                {
-                    res += " - Brute";
-                }
-                else
-                {
-                    res += " - Agile";
-                }
-
-                res += $" - {ContactList[i].Name}";
-
-                Console.WriteLine(res);
+                Console.WriteLine($"{i + 1}. {ContactList[i].GetStringStatus()} - {ContactList[i].GetStringType()} - { ContactList[i].Name}");
 
             }
         }
+
+
 
         public List<Wrestler> getAvailableWrestler()
         {
