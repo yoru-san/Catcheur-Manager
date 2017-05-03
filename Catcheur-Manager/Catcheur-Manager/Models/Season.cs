@@ -38,6 +38,8 @@ namespace Catcheur_Manager.Models
             CurrentMatch = new Match(this);
             Profit = 0;
         }
+
+
     }
 
 }

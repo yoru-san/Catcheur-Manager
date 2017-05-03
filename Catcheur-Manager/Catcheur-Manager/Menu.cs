@@ -237,6 +237,11 @@ namespace Catcheur_Manager
             if (!player.getCurrentMatch().isEnd)
             {
                 MenuMatchLaunch(player.getCurrentMatch());
+
+                if (player.getCurrentMatch().id == 8)
+                {
+                    player.EndSeason();
+                }
             }
 
 
@@ -253,6 +258,11 @@ namespace Catcheur_Manager
                 match.SecondWrestler.UnselectWrestler();
 
                 match.Start();
+
+                while (!match.isEnd)
+                {
+
+                }
 
                     
             }

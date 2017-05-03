@@ -37,7 +37,7 @@ namespace Catcheur_Manager.Models
             SeasonId = 1;
             SeasonHistory = new List<Season>();
             SeasonHistory.Add(new Season(this));
-            CurrentSeason = SeasonHistory[0];
+            CurrentSeason = SeasonHistory.Last();
             ContactList = new List<Wrestler>();
 
             generateBaseContacts();
@@ -90,6 +90,12 @@ namespace Catcheur_Manager.Models
         public Match getCurrentMatch()
         {
             return CurrentSeason.CurrentMatch;
+        }
+
+        public void EndSeason()
+        {
+            SeasonHistory.Add(new Season(this));
+            CurrentSeason = SeasonHistory.Last();
         }
 
         public override string ToString()

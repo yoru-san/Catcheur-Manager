@@ -108,16 +108,23 @@ namespace Catcheur_Manager.Models
 
         public void EndOfMatch()
         {
-            FirstWrestler.CheckStatus(SecondWrestler);
-            SecondWrestler.CheckStatus(FirstWrestler);
+            DeterminateWinner();
+            CalculateProfit();
+        }
 
+        public void DeterminateWinner()
+        {
             if (FirstWrestler.defensePoint > SecondWrestler.defensePoint)
             {
                 Console.WriteLine($"C'est le catcheur {FirstWrestler.Name} qui remporte la victoire");
+                Winner = FirstWrestler;
+                SecondWrestler.DeterminateStatus(FirstWrestler);
             }
             else
             {
                 Console.WriteLine($"C'est le catcheur {SecondWrestler.Name} qui gagne");
+                Winner = SecondWrestler;
+                FirstWrestler.DeterminateStatus(SecondWrestler);
             }
         }
 
@@ -167,6 +174,11 @@ namespace Catcheur_Manager.Models
                 isEnd = true;
                 isReady = false;
             }
+
+        }
+
+        public void CalculateProfit()
+        {
 
         }
 

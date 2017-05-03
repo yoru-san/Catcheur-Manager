@@ -97,7 +97,7 @@ namespace Catcheur_Manager.Models
 
         public abstract string GetStringType();
 
-        public void CheckStatus(Wrestler opponent)
+        public void DeterminateStatus(Wrestler opponent)
         {
  
             if (defensePoint < opponent.defensePoint || defensePoint < defensePoint/2)
