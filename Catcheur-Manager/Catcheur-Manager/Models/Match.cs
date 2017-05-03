@@ -163,17 +163,21 @@ namespace Catcheur_Manager.Models
             Console.ReadLine();
         }
 
+        bool midRound = false;
         private void OnTimedEvent(object source, ElapsedEventArgs e)
         {
             if (Iteration < IterationMax)
             {
-                Console.WriteLine($"Round #{Iteration+1}");
+                if (!midRound)
+                    Console.WriteLine($"Round #{Iteration+1}");
+                    
 
                 if (WrestlerRound == null || WrestlerRound == FirstWrestler)
                 {
                     Console.WriteLine($"C'est au tour de {FirstWrestler.Name} !");
                     FirstWrestler.ChooseAction(SecondWrestler);
                     WrestlerRound = SecondWrestler;
+                    
                 }
                 else
                 {
@@ -182,11 +186,18 @@ namespace Catcheur_Manager.Models
                     WrestlerRound = FirstWrestler;
                 }
 
-                Iteration++;
+                if (midRound)
+                {
+                    midRound = false;
+                    Iteration++;
+                }
+                else
+                    midRound = true;
+                    Profit += 5000;
             }
             else
             {
-                Console.WriteLine($"Le combat est fini en {Iteration} round ! Bravo !");
+                Console.WriteLine($"Le combat est fini en {Iteration} round ! Bravo ! Vous avez gagné {Profit} euros");
                 EndOfMatch();
                 timer.Enabled = false;
                 timer.Close();
@@ -198,7 +209,14 @@ namespace Catcheur_Manager.Models
 
         public void CalculateProfit()
         {
-
+            if (WayOfWinning)
+            {
+                Profit += 10000;
+            }
+            else
+            {
+                Profit += 1000;
+            }
         }
 
         public string ToShortString()

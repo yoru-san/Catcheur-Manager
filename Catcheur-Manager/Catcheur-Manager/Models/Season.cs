@@ -11,7 +11,6 @@ namespace Catcheur_Manager.Models
     public class Season
     {
         
-
         public int id { get; set; }
 
         public int MatchId { get; set; }
@@ -23,6 +22,7 @@ namespace Catcheur_Manager.Models
 
 
         public int Rate { get; set; }
+        public int NumberMatch { get; set; }
         public Season()
         {
             //XML only

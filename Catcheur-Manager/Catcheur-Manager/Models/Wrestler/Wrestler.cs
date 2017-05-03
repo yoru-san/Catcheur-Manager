@@ -121,6 +121,13 @@ namespace Catcheur_Manager.Models
             }
         }
 
+        public void ChangeStatus()
+        {
+            if (this.Status == Wrestler._status.En_Convalescence)
+            {
+
+            }
+        }
         public void UnselectWrestler()
         {
             isSelected = false;
