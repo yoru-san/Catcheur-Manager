@@ -120,6 +120,19 @@ namespace Catcheur_Manager.Models
                 this.Status = Wrestler._status.Hors_d_etat;
             }
         }
+
+        public void StateOfWinning(Wrestler opponent)
+        {
+            if (opponent.lifePoint == 0)
+            {
+                Console.WriteLine($"{this.Name} gagnant par K.O");
+                
+            }
+            else
+            {
+                Console.WriteLine($"{this.Name} gagnant par délai");
+            }
+        }
  
 
         public void UnselectWrestler()

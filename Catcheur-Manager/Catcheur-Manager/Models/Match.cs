@@ -128,6 +128,21 @@ namespace Catcheur_Manager.Models
             }
         }
 
+        public void ChangeWayOfWinning()
+        {
+            if (FirstWrestler.lifePoint > SecondWrestler.lifePoint)
+            {
+                FirstWrestler.StateOfWinning(SecondWrestler);
+                FirstWrestler = Winner;
+            }
+            else if (SecondWrestler.lifePoint > FirstWrestler.lifePoint)
+            {
+                SecondWrestler.StateOfWinning(FirstWrestler);
+                SecondWrestler = Winner;
+            }
+            
+        }
+
 
         public void Start()
         {
@@ -169,6 +184,7 @@ namespace Catcheur_Manager.Models
             {
                 Console.WriteLine($"Le combat est fini en {Iteration} round ! Bravo !");
                 EndOfMatch();
+                ChangeWayOfWinning();
                 timer.Enabled = false;
                 timer.Close();
                 isEnd = true;
@@ -185,7 +201,7 @@ namespace Catcheur_Manager.Models
         public string ToShortString()
         {
             string res = $"Match {id} - {FirstWrestler.Name} vs {SecondWrestler.Name} - Vainqueur:"
-        //+ $"\t{Winner.Name} par {WayOfWinning}\n"
+        + $"\t{Winner.Name} par {WayOfWinning}\n"
         +$" Nombre de rounds {Iteration}";
 
             return res;
@@ -195,8 +211,8 @@ namespace Catcheur_Manager.Models
         {
             string res = 
                 $"Saison {MatchSeason} - Match {id}:\n\n"
-                + $"Combatant 1: {FirstWrestler.Name}\nCombatant 2: {SecondWrestler.Name}\n"
-//+ $"Gagnant: {Winner.Name} par {WayOfWinning}\n"
+                + $"Combattant 1: {FirstWrestler.Name}\nCombattant 2: {SecondWrestler.Name}\n"
+                + $"Gagnant: {Winner.Name} par {WayOfWinning}\n"
                 + $"Nombre de rounds: {Iteration}/{IterationMax}\n"
                 + $"Profit: {Profit}";
 
