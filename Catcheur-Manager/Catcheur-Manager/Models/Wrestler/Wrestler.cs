@@ -121,20 +121,6 @@ namespace Catcheur_Manager.Models
             }
         }
 
-        public void StateOfWinning(Wrestler opponent)
-        {
-            if (opponent.lifePoint == 0)
-            {
-                Console.WriteLine($"{this.Name} gagnant par K.O");
-                
-            }
-            else
-            {
-                Console.WriteLine($"{this.Name} gagnant par délai");
-            }
-        }
- 
-
         public void UnselectWrestler()
         {
             isSelected = false;

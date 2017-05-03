@@ -106,41 +106,45 @@ namespace Catcheur_Manager.Models
             }
         }
 
+        public void DeterminateWayOfWinning()
+        {
+            if (Loser.lifePoint == 0)
+            {
+                Console.WriteLine($"{Winner.Name} gagnant par K.O");
+                WayOfWinning = true;
+            }
+
+            else if (Iteration == IterationMax)
+            {
+                Console.WriteLine($"{Winner.Name} remporte le combat par délai avec {Iteration} rounds au compteur !");
+                WayOfWinning = false;
+            }
+
+        }
+
         public void EndOfMatch()
         {
             DeterminateWinner();
+            DeterminateWayOfWinning();
             CalculateProfit();
         }
 
         public void DeterminateWinner()
         {
-            if (FirstWrestler.defensePoint > SecondWrestler.defensePoint)
+            if (FirstWrestler.lifePoint > SecondWrestler.lifePoint)
             {
                 Console.WriteLine($"C'est le catcheur {FirstWrestler.Name} qui remporte la victoire");
                 Winner = FirstWrestler;
+                Loser = SecondWrestler;
                 SecondWrestler.DeterminateStatus(FirstWrestler);
             }
             else
             {
                 Console.WriteLine($"C'est le catcheur {SecondWrestler.Name} qui gagne");
                 Winner = SecondWrestler;
+                Loser = FirstWrestler;
                 FirstWrestler.DeterminateStatus(SecondWrestler);
             }
-        }
-
-        public void ChangeWayOfWinning()
-        {
-            if (FirstWrestler.lifePoint > SecondWrestler.lifePoint)
-            {
-                FirstWrestler.StateOfWinning(SecondWrestler);
-                FirstWrestler = Winner;
-            }
-            else if (SecondWrestler.lifePoint > FirstWrestler.lifePoint)
-            {
-                SecondWrestler.StateOfWinning(FirstWrestler);
-                SecondWrestler = Winner;
-            }
-            
         }
 
 
@@ -184,7 +188,6 @@ namespace Catcheur_Manager.Models
             {
                 Console.WriteLine($"Le combat est fini en {Iteration} round ! Bravo !");
                 EndOfMatch();
-                ChangeWayOfWinning();
                 timer.Enabled = false;
                 timer.Close();
                 isEnd = true;
