@@ -106,6 +106,22 @@ namespace Catcheur_Manager.Models
             }
         }
 
+        public void EndOfMatch()
+        {
+            FirstWrestler.CheckStatus(SecondWrestler);
+            SecondWrestler.CheckStatus(FirstWrestler);
+
+            if (FirstWrestler.defensePoint > SecondWrestler.defensePoint)
+            {
+                Console.WriteLine($"C'est le catcheur {FirstWrestler.Name} qui remporte la victoire");
+            }
+            else
+            {
+                Console.WriteLine($"C'est le catcheur {SecondWrestler.Name} qui gagne");
+            }
+        }
+
+
         public void Start()
         {
             ChooseBeginner();
@@ -145,6 +161,7 @@ namespace Catcheur_Manager.Models
             else
             {
                 Console.WriteLine($"Le combat est fini en {Iteration} round ! Bravo !");
+                EndOfMatch();
                 timer.Enabled = false;
                 timer.Close();
                 isEnd = true;

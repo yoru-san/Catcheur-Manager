@@ -80,6 +80,30 @@ namespace Catcheur_Manager.Models
 
         }
 
+        public void CheckStatus(Wrestler opponent)
+        {
+ 
+            if (defensePoint < opponent.defensePoint || defensePoint < defensePoint/2)
+            {
+                Console.WriteLine($"Catcheur {this.Name} à l'hopital");
+                this.Status = Wrestler._status.En_Convalescence;
+            }
+
+            StateOfCombat();
+
+
+
+        }
+
+        public void StateOfCombat()
+        {
+            if (this.defensePoint < 1)
+            {
+                Console.WriteLine($"Catcheur {this.Name} mort");
+                this.Status = Wrestler._status.Hors_d_etat;
+            }
+        }
+ 
 
         public void UnselectWrestler()
         {
