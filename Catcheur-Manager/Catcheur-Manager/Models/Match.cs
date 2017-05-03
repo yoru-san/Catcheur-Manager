@@ -25,6 +25,13 @@ namespace Catcheur_Manager.Models
         public Wrestler Loser { get; set; }
         public bool WayOfWinning { get; set; }
         public int Profit { get; set; }
+
+        public int SeasonId { get; set; }
+
+        public int RoundId { get; set; }
+
+        public List<Round> Rounds { get; set; }
+
         private Timer timer;
 
         public bool isReady { get; set; }
@@ -68,7 +75,10 @@ namespace Catcheur_Manager.Models
             isEnd = false;
 
             Iteration = 0;
-            IterationMax = 20;
+            IterationMax = 2;
+
+            RoundId = 1;
+            Rounds = new List<Round>();
 
             MatchSeason = currentSeason.id;
             currentSeason.CurrentMatch = this;
@@ -103,7 +113,7 @@ namespace Catcheur_Manager.Models
             timer.Interval = 2000;
             timer.Enabled = true;
 
-            while(isEnd)
+            while(!isEnd)
             {
                 Debug.WriteLine("Match toujours en cours...");
             }
@@ -115,7 +125,7 @@ namespace Catcheur_Manager.Models
         {
             if (Iteration < IterationMax)
             {
-                Console.WriteLine($"Round #{Iteration}");
+                Console.WriteLine($"Round #{Iteration+1}");
 
                 if (WrestlerRound == null || WrestlerRound == FirstWrestler)
                 {
@@ -143,11 +153,43 @@ namespace Catcheur_Manager.Models
 
         }
 
+        public string ToShortString()
+        {
+            string res = $"Match {id} - {FirstWrestler.Name} vs {SecondWrestler.Name} - Vainqueur:"
+        //+ $"\t{Winner.Name} par {WayOfWinning}\n"
+        +$" Nombre de rounds {Iteration}";
+
+            return res;
+        }
+
         public override string ToString()
         {
-            string res = $"Saison {MatchSeason} - Match n°{id}:\nParticipants: {FirstWrestler}, {SecondWrestler}\n\nVainqueur:\t{Winner} par {WayOfWinning}\nNombre de rounds\t{Iteration}";
+            string res = 
+                $"Saison {MatchSeason} - Match {id}:\n\n"
+                + $"Combatant 1: {FirstWrestler.Name}\nCombatant 2: {SecondWrestler.Name}\n"
+//+ $"Gagnant: {Winner.Name} par {WayOfWinning}\n"
+                + $"Nombre de rounds: {Iteration}/{IterationMax}\n"
+                + $"Profit: {Profit}";
 
-            return base.ToString();
+            foreach (Round round in Rounds)
+            {
+                res += round.ToShortString();
+            }
+
+            return res;
+        }
+
+
+        public int getMatchNum()
+        {
+            if (isEnd)
+            {
+                return id + 1;
+            }
+            else
+            {
+                return id;
+            }
         }
     }
 }
