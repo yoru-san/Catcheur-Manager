@@ -68,7 +68,7 @@ namespace Catcheur_Manager.Models
 
         public void orderContactList()
         {
-            ContactList = ContactList.OrderBy(o => o.Status).OrderBy(o => o.Name).ToList();
+            ContactList = ContactList.OrderBy(o => o.Name).OrderBy(o => o.Status).ToList();
         }
         public void printContactList(List<Wrestler> ContactList)
         {
