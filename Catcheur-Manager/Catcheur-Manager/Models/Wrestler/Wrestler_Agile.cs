@@ -15,7 +15,7 @@ namespace Catcheur_Manager.Models
             //XML only
         }
 
-        public Wrestler_Agile(string name, _status status, Player player): base(name, status, player)
+        public Wrestler_Agile(string name, _status status, Player player, Action<Wrestler> sp) : base(name, status, player, sp)
         {
             lifePoint = 1;
             attackPoint = 3;

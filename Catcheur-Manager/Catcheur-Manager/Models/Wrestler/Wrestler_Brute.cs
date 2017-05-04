@@ -15,7 +15,7 @@ namespace Catcheur_Manager.Models
             //XML only
         }
 
-        public Wrestler_Brute(string name, _status status, Player player) : base(name, status, player)
+        public Wrestler_Brute(string name, _status status, Player player, Action<Wrestler> sp) : base(name, status, player, sp)
         {
             lifePoint = 100;
             attackPoint = 5;
