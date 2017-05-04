@@ -65,6 +65,7 @@ namespace Catcheur_Manager.Models
         private void specialAttack()
         {
             Console.WriteLine($"{Name} fait son attaque spéciale ! ");
+            Special(opponent);
 
         }
 
@@ -84,7 +85,7 @@ namespace Catcheur_Manager.Models
                     break;
 
                 case 2:
-                    specialAttack();
+                    Special(opponent);
                     break;
             }
 
