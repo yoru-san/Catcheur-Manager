@@ -75,7 +75,7 @@ namespace Catcheur_Manager.Models
             isEnd = false;
 
             Iteration = 0;
-            IterationMax = 2;
+            IterationMax = 20;
 
             RoundId = 1;
             Rounds = new List<Round>();
@@ -88,6 +88,8 @@ namespace Catcheur_Manager.Models
             SecondWrestler = wres2;
             timer = new Timer();
         }
+
+
 
        public void ChooseBeginner()
         {
@@ -108,7 +110,7 @@ namespace Catcheur_Manager.Models
 
         public void DeterminateWayOfWinning()
         {
-            if (Loser.lifePoint == 0)
+            if (Loser.lifePoint <= 0)
             {
                 Console.WriteLine($"{Winner.Name} gagnant par K.O");
                 WayOfWinning = true;
@@ -120,13 +122,6 @@ namespace Catcheur_Manager.Models
                 WayOfWinning = false;
             }
 
-        }
-
-        public void EndOfMatch()
-        {
-            DeterminateWinner();
-            DeterminateWayOfWinning();
-            CalculateProfit();
         }
 
         public void DeterminateWinner()
@@ -148,6 +143,14 @@ namespace Catcheur_Manager.Models
         }
 
 
+
+        public void EndOfMatch()
+        {
+            DeterminateWinner();
+            DeterminateWayOfWinning();
+            CalculateProfit();
+        }
+
         public void Start()
         {
             ChooseBeginner();
@@ -166,11 +169,15 @@ namespace Catcheur_Manager.Models
         bool midRound = false;
         private void OnTimedEvent(object source, ElapsedEventArgs e)
         {
-            if (Iteration < IterationMax)
+            if (FirstWrestler.lifePoint > 0 & SecondWrestler.lifePoint > 0 && Iteration < IterationMax)
             {
                 if (!midRound)
-                    Console.WriteLine($"Round #{Iteration+1}");
-                    
+                {
+                    Round round = new Round(Iteration+1);
+                    Console.WriteLine($"Round #{round.ID}");
+                    Profit += 5000;
+                }
+
 
                 if (WrestlerRound == null || WrestlerRound == FirstWrestler)
                 {
@@ -190,7 +197,6 @@ namespace Catcheur_Manager.Models
                 {
                     midRound = false;
                     Iteration++;
-                    Profit += 5000;
                 }
                 else
                     midRound = true;
@@ -198,7 +204,7 @@ namespace Catcheur_Manager.Models
             else
             {
                 EndOfMatch();
-                Console.WriteLine($"Le combat est fini en {Iteration} round ! Bravo ! Vous avez gagné {Profit} euros");
+                Console.WriteLine($"Le combat est fini en {/*round.ID*/ Iteration+1} rounds ! Bravo ! Vous avez gagné {Profit} euros");
                 timer.Enabled = false;
                 timer.Close();
                 isEnd = true;
