@@ -394,7 +394,7 @@ namespace Catcheur_Manager
                     }
                     else
                     {
-                        list = Highscore.SearchWrestler(search, player.ContactList);
+                        //list = Highscore.SearchWrestler(search, player.ContactList);
                     }
 
                 }

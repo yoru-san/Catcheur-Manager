@@ -15,6 +15,16 @@ namespace Catcheur_Manager
         public string Action { get; set; }
         public Wrestler BeginnerOfMatch { get; set; }
         public int MatchSeason { get; set; }
+        public Round(int id)
+        {
+            ID = id;
+        }
+
+        public Round()
+        {
+            //XML only
+        }
+
         public string ToShortString()
         {
             return $"Round {ID}";

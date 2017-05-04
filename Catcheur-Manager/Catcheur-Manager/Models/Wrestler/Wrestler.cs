@@ -133,6 +133,19 @@ namespace Catcheur_Manager.Models
             isSelected = false;
         }
 
+        public bool VerifyLifepoint()
+        {
+            if (lifePoint <= 0)
+            {
+                Console.WriteLine($"fin du combat !");
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public override string ToString()
         {
             return $"{Name} :"
