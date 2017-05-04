@@ -221,10 +221,7 @@ namespace Catcheur_Manager.Models
 
         public string ToShortString()
         {
-            string res = $"Match {id} - {FirstWrestler.Name} vs {SecondWrestler.Name} - Vainqueur:"
-        + $" {Winner.Name}\n";
-
-            return res;
+            return $"Match {id} - W {Winner.Name} vs L {Loser.Name} - {Profit}e";
         }
 
         public override string ToString()

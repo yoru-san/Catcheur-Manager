@@ -20,7 +20,6 @@ namespace Catcheur_Manager.Models
 
         public List<Match> MatchHistory { get; set; }
 
-
         public int Rate { get; set; }
         public Season()
         {
