@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 using System.Xml.Serialization;
 
 namespace Catcheur_Manager.Models
@@ -143,9 +144,15 @@ namespace Catcheur_Manager.Models
         public static void DeserializePlayers()
         {
             XmlSerializer serializer = new XmlSerializer(typeof(List<Player>));
+            
             using (StreamReader rd = new StreamReader("players.xml"))
             {
-                PlayerList = serializer.Deserialize(rd) as List<Player>;
+                XmlReader reader = new XmlTextReader(rd);
+                if (serializer.CanDeserialize(reader))
+                {
+                    PlayerList = serializer.Deserialize(rd) as List<Player>;
+                }
+                
             }
 
         }

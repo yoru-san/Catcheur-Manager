@@ -169,7 +169,7 @@ namespace Catcheur_Manager
                 {
                     Console.WriteLine($"Recherche: \"{search}\"");
                 }
-                Console.WriteLine("0->Quitter");
+                Console.WriteLine("0. -> Quitter");
                 player.printContactList(list);
 
 
