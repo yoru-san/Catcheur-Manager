@@ -123,8 +123,12 @@ namespace Catcheur_Manager
                         break;
                     case 4:
                         Console.Clear();
-                        end = true;
-                        res = true;
+                        Console.WriteLine("Voulez vous vraiment quitter le jeu?\n0. -> Oui\t1. -> Non");
+                        if (!MenuTORChoice())
+                        {
+                            end = true;
+                            res = true;
+                        }
                         break;
                     case 5:
                         MenuDeletePlayer(player);
