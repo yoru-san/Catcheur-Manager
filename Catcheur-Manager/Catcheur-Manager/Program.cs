@@ -22,6 +22,7 @@ namespace Catcheur_Manager
 
         }
 
+        //Action<T>
         static void Main(string[] args)
         {
             FileCheck("players.xml");
