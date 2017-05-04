@@ -102,6 +102,8 @@ namespace Catcheur_Manager
                 if (player.getAvailableWrestler().Count <= 2)
                 {
                     MenuGameOver(player);
+                    res = false;
+                    end = true;
                 }
                 else
                 {
@@ -111,44 +113,43 @@ namespace Catcheur_Manager
 
                     choix = MenuIntParse(0, 5);
 
-                switch (choix)
-                {
-                    case 0:
-                        MenuMatch(player);
-                        break;
-                    case 1:
-                        MenuHistory(player);
-                        break;
-                    case 2:
-                        MenuList(player);
-                        break;
-                    case 3:
-                        Console.Clear();
-                        end = true;
-                        res = false;
-                        break;
-                    case 4:
-                        Console.Clear();
-                        Console.WriteLine("Voulez vous vraiment quitter le jeu?\n0. -> Oui\t1. -> Non");
-                        if (!MenuTORChoice())
-                        {
+                    switch (choix)
+                    {
+                        case 0:
+                            MenuMatch(player);
+                            break;
+                        case 1:
+                            MenuHistory(player);
+                            break;
+                        case 2:
+                            MenuList(player);
+                            break;
+                        case 3:
+                            Console.Clear();
                             end = true;
-                            res = true;
-                        }
-                        break;
-                    case 5:
-                        MenuDeletePlayer(player);
-                        end = true;
-                        res = false;
-                        break;
+                            res = false;
+                            break;
+                        case 4:
+                            Console.Clear();
+                            Console.WriteLine("Voulez vous vraiment quitter le jeu?\n0. -> Oui\t1. -> Non");
+                            if (!MenuTORChoice())
+                            {
+                                end = true;
+                                res = true;
+                            }
+                            break;
+                        case 5:
+                            MenuDeletePlayer(player);
+                            end = true;
+                            res = false;
+                            break;
+                    }
+
+
                 }
-                
-                
+               
             }
             return res;
-
-
-
         }
 
         public static void MenuList(Player player)
@@ -338,7 +339,9 @@ namespace Catcheur_Manager
 
         static void MenuGameOver(Player player)
         {
-         Console.WriteLine($"GAME OVER \nVous avez perdu car vous avez moins de 2 catcheurs dans votre base de contact ! Votre score : {player.Money} euros");
+            Console.Clear();
+            Console.WriteLine($"GAME OVER \nVous avez perdu car vous avez moins de 2 catcheurs dans votre base de contact ! Votre score : {player.Money} euros");
+            Console.ReadLine();
         }
 
     }
