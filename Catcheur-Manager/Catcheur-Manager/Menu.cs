@@ -274,10 +274,17 @@ namespace Catcheur_Manager
             {
                 MenuMatchLaunch(player.getCurrentMatch());
 
-                if (player.getCurrentMatch().id == 8)
+                if (player.getCurrentMatch().isEnd)
                 {
-                    player.EndSeason();
+                    player.UpdatdeStats();
+
+                    if (player.getCurrentMatch().id == 8)
+                    {
+                        player.EndSeason();
+                    }
                 }
+
+
             }
 
 

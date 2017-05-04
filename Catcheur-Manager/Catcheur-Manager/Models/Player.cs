@@ -12,7 +12,7 @@ namespace Catcheur_Manager.Models
     public class Player
     {
         public int SeasonId { get; set; }
-        public int Money { get; set; }
+        public double Money { get; set; }
 
         public string Name { get; set; }
 
@@ -121,6 +121,14 @@ namespace Catcheur_Manager.Models
         {
             PlayerList.Remove(this);
             SerializePlayers();
+        }
+
+        public void UpdatdeStats()
+        {
+            Money += CurrentSeason.GetLastMatchProfit();
+            CurrentSeason.Profit += CurrentSeason.GetLastMatchProfit();
+
+            //Gérer convalescence
         }
 
         public static void SerializePlayers()
