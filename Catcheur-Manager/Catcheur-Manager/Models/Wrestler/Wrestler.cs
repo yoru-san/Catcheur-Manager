@@ -62,12 +62,6 @@ namespace Catcheur_Manager.Models
 
         }
 
-        private void specialAttack()
-        {
-            Console.WriteLine($"{Name} fait son attaque spéciale ! ");
-            Special(opponent);
-
-        }
 
         public void ChooseAction(Wrestler opponent)
         {
@@ -86,6 +80,7 @@ namespace Catcheur_Manager.Models
 
                 case 2:
                     Special(opponent);
+                    Console.WriteLine($"{this.Name} lance son attaque spéciale" );
                     break;
             }
 
