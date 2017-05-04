@@ -160,7 +160,7 @@ namespace Catcheur_Manager.Models
                 //Debug.WriteLine("Match toujours en cours...");
             }
 
-            Console.ReadLine();
+
         }
 
         bool midRound = false;

@@ -14,11 +14,14 @@ namespace Catcheur_Manager.Models
         public int id { get; set; }
 
         public int MatchId { get; set; }
-        public int Profit { get; set; }
+        public double Profit { get; set; }
 
         public Match CurrentMatch { get; set; }
 
         public List<Match> MatchHistory { get; set; }
+
+        public double ProfitIncrement { get; set;}
+
 
         public int Rate { get; set; }
         public Season()
@@ -32,9 +35,16 @@ namespace Catcheur_Manager.Models
             player.SeasonId ++;
             MatchId = 1;
 
+            ProfitIncrement = Math.Pow(1.13, (id-1));
+
             MatchHistory = new List<Match>();
             CurrentMatch = new Match(this);
             Profit = 0;
+        }
+
+        public double GetLastMatchProfit()
+        {
+            return CurrentMatch.Profit * ProfitIncrement;
         }
 
 
