@@ -9,22 +9,32 @@ using System.IO;
 
 namespace Catcheur_Manager
 {
+
     
     class Program
     {
-        
+        public static void FileCheck(string file)
+        {
+            if (!File.Exists(file))
+            {
+                File.Create(file);
+            }
+
+        }
+
         static void Main(string[] args)
         {
-            if (!File.Exists("players.xml"))
-            {
-                File.Create("players.xml");
-            }
+            FileCheck("players.xml");
+            FileCheck("highscores.xml");
+
             if (new FileInfo("players.xml").Length > 0)
             {
                 Player.DeserializePlayers();
             }
-
-
+            if (new FileInfo("highscores.xml").Length > 0)
+            {
+                Highscore.DeserializeHighscores();
+            }
             Menu.MenuStart();
 
         }

@@ -43,6 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Highscores.cs" />
+    <Compile Include="ISearchable.cs" />
     <Compile Include="Models\Match.cs" />
     <Compile Include="Menu.cs" />
     <Compile Include="Models\Player.cs" />

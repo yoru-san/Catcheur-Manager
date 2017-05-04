@@ -46,7 +46,7 @@ namespace Catcheur_Manager.Models
 
             SerializePlayers();
 
-            Menu.MenuPlayer(this);
+           
             
             
         }
@@ -73,12 +73,29 @@ namespace Catcheur_Manager.Models
         }
         public void printContactList(List<Wrestler> ContactList)
         {
-
-            for (int i = 0; i < ContactList.Count; i++)
+            if (ContactList.Count > 9)
             {
-                Console.WriteLine($"{i + 1}. {ContactList[i].GetStringStatus()} - {ContactList[i].GetStringType()} - { ContactList[i].Name}");
-
+                for (int i = 0; i < ContactList.Count; i++)
+                {
+                    if (i < 9)
+                    {
+                        Console.WriteLine($" {i + 1}. {ContactList[i].GetStringStatus()} - {ContactList[i].GetStringType()} - {ContactList[i].Name}");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"{i + 1}. {ContactList[i].GetStringStatus()} - {ContactList[i].GetStringType()} - {ContactList[i].Name}");
+                    }
+                }
             }
+            else
+            {
+                for (int i = 0; i < ContactList.Count; i++)
+                {
+                    Console.WriteLine($"{i + 1}. {ContactList[i].GetStringStatus()} - {ContactList[i].GetStringType()} - {ContactList[i].Name}");
+                }
+            }
+
+
         }
 
 
@@ -124,7 +141,7 @@ namespace Catcheur_Manager.Models
             SerializePlayers();
         }
 
-        public void UpdatdeStats()
+        public void UpdateStats()
         {
             Money += CurrentSeason.GetLastMatchProfit();
             CurrentSeason.Profit += CurrentSeason.GetLastMatchProfit();
@@ -147,15 +164,12 @@ namespace Catcheur_Manager.Models
             
             using (StreamReader rd = new StreamReader("players.xml"))
             {
-                XmlReader reader = new XmlTextReader(rd);
-                if (serializer.CanDeserialize(reader))
-                {
-                    PlayerList = serializer.Deserialize(rd) as List<Player>;
-                }
-                
+                PlayerList = serializer.Deserialize(rd) as List<Player>;
             }
 
         }
+
+
     }
 
 

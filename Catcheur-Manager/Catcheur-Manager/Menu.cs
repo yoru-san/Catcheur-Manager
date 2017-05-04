@@ -13,48 +13,64 @@ namespace Catcheur_Manager
         public static void MenuStart()
         {
             Console.Write("Bienvenue dans Catcheur Manager!\n");
+            Console.WriteLine("Appuyez sur ENTRER pour continuer...");
+            Console.ReadLine();
 
-            if (Player.PlayerList.Count == 0)
-            {
-                MenuNewPlayer();
-            }
-            else
-            {
-                bool end = false;
-                int choix = -1;
 
-                while (!end)
+
+            bool end = false;
+            int choix = -1;
+
+            while (!end)
+            {
+                Console.Clear();
+
+                if (Player.PlayerList.Count != 0)
                 {
-                    Console.WriteLine("Sélectionnez un joueur\n\n0 -> Nouveau joueur\n");
+                    Console.WriteLine("Sélectionnez un joueur\n\n0. -> Nouveau joueur\n1. -> Highscores\n");
                     for (int i = 0; i < Player.PlayerList.Count; i++)
                     {
-                        Console.WriteLine($"{i+1}. {Player.PlayerList[i].Name}");
+                        Console.WriteLine($"{i + 2}. {Player.PlayerList[i].Name}");
                     }
 
-                    choix = MenuIntParse(0, Player.PlayerList.Count);
+                    choix = MenuIntParse(0, Player.PlayerList.Count+1);
 
-                    if (choix == 0)
+                    switch (choix)
                     {
-                        MenuNewPlayer();
-                    }
-                    else
-                    {
-                        if (MenuPlayer(Player.PlayerList[choix - 1]))
-                        {
-                            end = true;
-                        }
+                        case 0:
+                            MenuNewPlayer();
+                            if (MenuPlayer(Player.PlayerList.Last()))
+                            {
+                                end = true;
+                            }
+                            break;
+                        case 1:
+                            MenuHighscores();
+                            break;
+                        default:
+                            if (MenuPlayer(Player.PlayerList[choix - 2]))
+                            {
+                                end = true;
+                            }
+                            break;
+
                     }
                 }
-
+                else
+                {
+                    MenuNewPlayer();
+                    if (MenuPlayer(Player.PlayerList.Last()))
+                    {
+                        end = true;
+                    }
+                }
             }
-            
-
         }
 
         public static void MenuNewPlayer()
         {
             bool end = false;
-            
+
             int choix = -1;
 
             string name = "";
@@ -74,7 +90,7 @@ namespace Catcheur_Manager
             }
 
             Console.Clear();
-            Player player = new Player(name);
+            new Player(name);
         }
 
         public static void MenuDeletePlayer(Player player)
@@ -87,7 +103,7 @@ namespace Catcheur_Manager
                 {
                     player.Delete();
                 }
-                
+
             }
         }
 
@@ -147,7 +163,7 @@ namespace Catcheur_Manager
 
 
                 }
-               
+
             }
             return res;
         }
@@ -159,7 +175,7 @@ namespace Catcheur_Manager
             string search = string.Empty;
             List<Wrestler> list = player.ContactList;
 
-            
+
 
             while (!end)
             {
@@ -169,14 +185,15 @@ namespace Catcheur_Manager
                 {
                     Console.WriteLine($"Recherche: \"{search}\"");
                 }
-                Console.WriteLine("0. -> Quitter");
+                Console.WriteLine("0. -> Quitter\n");
                 player.printContactList(list);
 
 
 
                 search = Console.ReadLine();
 
-                if (int.TryParse(search, out choix)){
+                if (int.TryParse(search, out choix))
+                {
                     if (choix < 0 || choix > list.Count)
                     {
                         Console.WriteLine($"Erreur: le nombre doit être compris entre {0} et {list.Count}");
@@ -189,8 +206,9 @@ namespace Catcheur_Manager
                         }
                         else
                         {
+                            search = "";
                             Console.Clear();
-                            Console.WriteLine($"{list[choix-1].ToString()}\n\nAppuyez sur ENTRER pour continuer...");
+                            Console.WriteLine($"{list[choix - 1].ToString()}\n\nAppuyez sur ENTRER pour continuer...");
                             Console.ReadLine();
                         }
                     }
@@ -199,7 +217,7 @@ namespace Catcheur_Manager
                 {
                     list = player.SearchWrestler(search, player.ContactList);
                 }
-                
+
 
             }
             Console.Clear();
@@ -223,7 +241,7 @@ namespace Catcheur_Manager
                 {
 
                     Console.Clear();
-                    Console.WriteLine("Création du match de samedi soir: \nSélectionnez deux catcheurs parmis la liste:\nPremier catcheur:\n\n0 -> Quitter");
+                    Console.WriteLine("Création du match de samedi soir: \nSélectionnez deux catcheurs parmis la liste:\nPremier catcheur:\n\n0. -> Quitter\n");
                     player.printContactList(player.getAvailableWrestler());
 
                     choix = MenuIntParse(0, player.getAvailableWrestler().Count());
@@ -276,7 +294,7 @@ namespace Catcheur_Manager
 
                 if (player.getCurrentMatch().isEnd)
                 {
-                    player.UpdatdeStats();
+                    player.UpdateStats();
 
                     if (player.getCurrentMatch().id == 8)
                     {
@@ -304,7 +322,7 @@ namespace Catcheur_Manager
                 Console.WriteLine("\nAppuyez sur ENTRER pour continuer...");
                 Console.ReadLine();
 
-                    
+
             }
 
 
@@ -326,6 +344,63 @@ namespace Catcheur_Manager
             Console.ReadLine();
         }
 
+        public static void MenuHighscores()
+        {
+            if (Highscore.Scores.Count != 0)
+            {
+
+                bool end = false;
+                int choix = -1;
+                string search = string.Empty;
+                List<Highscore> list = Highscore.Scores;
+
+
+
+                while (!end)
+                {
+                    Console.Clear();
+                    Console.Write("Liste des highscores: \n(Entrez un nom pour le rechercher -- ENTRER pour reset)\n\n");
+                    if (search != "")
+                    {
+                        Console.WriteLine($"Recherche: \"{search}\"");
+                    }
+                    Console.WriteLine("0. -> Quitter\n");
+                    Highscore.PrintHighscores();
+
+
+
+                    search = Console.ReadLine();
+
+                    if (int.TryParse(search, out choix))
+                    {
+                        if (choix < 0 || choix > list.Count)
+                        {
+                            Console.WriteLine($"Erreur: le nombre doit être compris entre {0} et {list.Count}");
+                        }
+                        else
+                        {
+                            if (choix == 0)
+                            {
+                                end = true;
+                            }
+                            else
+                            {
+                                search = "";
+                                Console.Clear();
+                                Console.WriteLine($"{list[choix - 1].ToString()}\n\nAppuyez sur ENTRER pour continuer...");
+                                Console.ReadLine();
+                            }
+                        }
+                    }
+                    else
+                    {
+                        list = Highscore.SearchWrestler(search, player.ContactList);
+                    }
+
+                }
+            }
+        }
+
         static int MenuIntParse(int min, int max)
         {
             bool ok = false;
@@ -338,14 +413,14 @@ namespace Catcheur_Manager
                 }
                 else
                 {
-                    if(res < min || res > max)
+                    if (res < min || res > max)
                     {
                         Console.WriteLine($"Erreur: le nombre doit être compris entre {min} et {max}");
                     }
                     else
                     {
                         ok = true;
-                    } 
+                    }
                 }
             }
             return res;
@@ -362,22 +437,17 @@ namespace Catcheur_Manager
             {
                 return true;
             }
-            
+
         }
 
         static void MenuGameOver(Player player)
         {
             Console.Clear();
-            Console.WriteLine($"GAME OVER \nVous avez perdu car vous avez moins de 2 catcheurs dans votre base de contact ! Votre score : {player.Money} euros");
+            Console.WriteLine($"GAME OVER \nVous avez perdu car vous avez moins de 2 catcheurs dans votre base de contacts ! \nVotre score : {player.Money} euros\n\nVotre personnage va être supprimé, mes ses statistiques seront conservées dans les highscores\n\nAppuyez sur ENTRER pour continuer...");
+            Highscore.Scores.Add(new Highscore(player));
             Console.ReadLine();
+            player.Delete();
         }
-
-    }
-
-
-
-    class Choix
-    {
 
     }
 }
