@@ -157,7 +157,7 @@ namespace Catcheur_Manager.Models
 
             while(!isEnd)
             {
-                Debug.WriteLine("Match toujours en cours...");
+                //Debug.WriteLine("Match toujours en cours...");
             }
 
             Console.ReadLine();
@@ -222,8 +222,7 @@ namespace Catcheur_Manager.Models
         public string ToShortString()
         {
             string res = $"Match {id} - {FirstWrestler.Name} vs {SecondWrestler.Name} - Vainqueur:"
-        + $"\t{Winner.Name} par {WayOfWinning}\n"
-        +$" Nombre de rounds {Iteration}";
+        + $" {Winner.Name}\n";
 
             return res;
         }
@@ -233,7 +232,7 @@ namespace Catcheur_Manager.Models
             string res = 
                 $"Saison {MatchSeason} - Match {id}:\n\n"
                 + $"Combattant 1: {FirstWrestler.Name}\nCombattant 2: {SecondWrestler.Name}\n"
-                + $"Gagnant: {Winner.Name} par {WayOfWinning}\n"
+                + $"Gagnant: {Winner.Name} par {GetStringWayOfWinning()}\n"
                 + $"Nombre de rounds: {Iteration}/{IterationMax}\n"
                 + $"Profit: {Profit}";
 
@@ -255,6 +254,18 @@ namespace Catcheur_Manager.Models
             else
             {
                 return id;
+            }
+        }
+
+        public string GetStringWayOfWinning()
+        {
+            if (WayOfWinning)
+            {
+                return "K.O";
+            }
+            else
+            {
+                return "Délai";
             }
         }
     }
