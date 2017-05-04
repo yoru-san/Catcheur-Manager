@@ -299,7 +299,7 @@ namespace Catcheur_Manager
             {
                 match.FirstWrestler.UnselectWrestler();
                 match.SecondWrestler.UnselectWrestler();
-
+                Console.Clear();
                 match.Start();
                 Console.WriteLine("\nAppuyez sur ENTRER pour continuer...");
                 Console.ReadLine();
