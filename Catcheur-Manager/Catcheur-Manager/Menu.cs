@@ -294,11 +294,8 @@ namespace Catcheur_Manager
                 match.SecondWrestler.UnselectWrestler();
 
                 match.Start();
-
-                while (!match.isEnd)
-                {
-
-                }
+                Console.WriteLine("\nAppuyez sur ENTRER pour continuer...");
+                Console.ReadLine();
 
                     
             }
