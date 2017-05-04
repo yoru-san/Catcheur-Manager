@@ -10,7 +10,7 @@ namespace Catcheur_Manager.Models
     [XmlInclude(typeof(Wrestler))]
     [XmlInclude(typeof(Wrestler_Agile))]
     [XmlInclude(typeof(Wrestler_Brute))]
-    public abstract class Wrestler
+    public abstract class Wrestler : ISearchable
     {
         
 
