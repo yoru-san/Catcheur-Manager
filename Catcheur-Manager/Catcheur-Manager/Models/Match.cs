@@ -133,14 +133,14 @@ namespace Catcheur_Manager.Models
         {
             if (FirstWrestler.lifePoint > SecondWrestler.lifePoint)
             {
-                Console.WriteLine($"C'est le catcheur {FirstWrestler.Name} qui remporte la victoire");
+                //Console.WriteLine($"C'est le catcheur {FirstWrestler.Name} qui remporte la victoire");
                 Winner = FirstWrestler;
                 Loser = SecondWrestler;
                 SecondWrestler.DeterminateStatus(FirstWrestler);
             }
             else
             {
-                Console.WriteLine($"C'est le catcheur {SecondWrestler.Name} qui gagne");
+               //Console.WriteLine($"C'est le catcheur {SecondWrestler.Name} qui gagne");
                 Winner = SecondWrestler;
                 Loser = FirstWrestler;
                 FirstWrestler.DeterminateStatus(SecondWrestler);
@@ -190,15 +190,15 @@ namespace Catcheur_Manager.Models
                 {
                     midRound = false;
                     Iteration++;
+                    Profit += 5000;
                 }
                 else
                     midRound = true;
-                    Profit += 5000;
             }
             else
             {
-                Console.WriteLine($"Le combat est fini en {Iteration} round ! Bravo ! Vous avez gagné {Profit} euros");
                 EndOfMatch();
+                Console.WriteLine($"Le combat est fini en {Iteration} round ! Bravo ! Vous avez gagné {Profit} euros");
                 timer.Enabled = false;
                 timer.Close();
                 isEnd = true;
