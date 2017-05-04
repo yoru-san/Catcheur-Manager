@@ -17,7 +17,7 @@ namespace Catcheur_Manager.Models
 
         public Wrestler_Agile(string name, _status status, Player player): base(name, status, player)
         {
-            lifePoint = 1;
+            lifePoint = 125;
             attackPoint = 3;
             defensePoint = 3;
 

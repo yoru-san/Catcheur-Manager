@@ -204,7 +204,7 @@ namespace Catcheur_Manager.Models
             else
             {
                 EndOfMatch();
-                Console.WriteLine($"Le combat est fini en {/*round.ID*/ Iteration+1} rounds ! Bravo ! Vous avez gagné {Profit} euros");
+                Console.WriteLine($"Bravo ! Vous avez gagné {Profit} euros");
                 timer.Enabled = false;
                 timer.Close();
                 isEnd = true;
