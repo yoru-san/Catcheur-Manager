@@ -10,13 +10,13 @@ using System.Xml.Serialization;
 namespace Catcheur_Manager
 {
     [XmlInclude(typeof(Highscore))]
-    class Highscore
+    class Highscore : ISearchable
     {
         public static List<Highscore> Scores { get; set; } = new List<Highscore>();
 
         public double Value { get; set; }
 
-        public string PlayerName { get; set; }
+        public string Name { get; set; }
 
         public int Season { get; set; }
 
@@ -27,7 +27,7 @@ namespace Catcheur_Manager
         public Highscore(Player player)
         {
             Value = player.Money;
-            PlayerName = player.Name;
+            Name = player.Name;
             Season = player.CurrentSeason.id;
             Match = player.getCurrentMatch().id;
         }
@@ -40,11 +40,11 @@ namespace Catcheur_Manager
                 {
                     if (i < 9)
                     {
-                        Console.WriteLine($" {i + 1}. {Scores[i].Value} - {Scores[i].PlayerName}");
+                        Console.WriteLine($" {i + 1}. {Scores[i].Value} - {Scores[i].Name}");
                     }
                     else
                     {
-                        Console.WriteLine($"{i + 1}. {Scores[i].Value} - {Scores[i].PlayerName}");
+                        Console.WriteLine($"{i + 1}. {Scores[i].Value} - {Scores[i].Name}");
                     }
                 }
             }
@@ -52,7 +52,7 @@ namespace Catcheur_Manager
             {
                 for (int i = 0; i < Scores.Count; i++)
                 {
-                    Console.WriteLine($"{i + 1}. {Scores[i].Value} - {Scores[i].PlayerName}");
+                    Console.WriteLine($"{i + 1}. {Scores[i].Value} - {Scores[i].Name}");
                 }
             }
         }

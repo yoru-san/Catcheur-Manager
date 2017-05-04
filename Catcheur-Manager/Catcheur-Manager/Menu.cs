@@ -150,6 +150,7 @@ namespace Catcheur_Manager
                             Console.WriteLine("Voulez vous vraiment quitter le jeu?\n0. -> Oui\t1. -> Non");
                             if (!MenuTORChoice())
                             {
+                                Player.SerializePlayers();
                                 end = true;
                                 res = true;
                             }
@@ -215,7 +216,7 @@ namespace Catcheur_Manager
                 }
                 else
                 {
-                    list = player.SearchWrestler(search, player.ContactList);
+                    list = Search(player.ContactList, search);
                 }
 
 
@@ -394,7 +395,7 @@ namespace Catcheur_Manager
                     }
                     else
                     {
-                        list = Highscore.SearchWrestler(search, player.ContactList);
+                        list = Search(Highscore.Scores, search);
                     }
 
                 }
@@ -447,6 +448,11 @@ namespace Catcheur_Manager
             Highscore.Scores.Add(new Highscore(player));
             Console.ReadLine();
             player.Delete();
+        }
+
+        static List<T> Search<T>(List<T> list, string search) where T: ISearchable
+        {
+            return list.Where(w => w.Name.ToLower().Contains(search.ToLower())).ToList();
         }
 
     }

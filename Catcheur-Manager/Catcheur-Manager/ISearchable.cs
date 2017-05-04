@@ -8,6 +8,7 @@ namespace Catcheur_Manager
 {
     interface ISearchable
     {
+        string Name { get; set; }
 
     }
 }
