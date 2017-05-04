@@ -111,33 +111,36 @@ namespace Catcheur_Manager
 
                     choix = MenuIntParse(0, 5);
 
-                    switch (choix)
-                    {
-                        case 0:
-                            MenuMatch(player);
-                            break;
-                        case 1:
-                            MenuHistory(player);
-                            break;
-                        case 2:
-                            MenuList(player);
-                            break;
-                        case 3:
-                            Console.Clear();
-                            end = true;
-                            res = false;
-                            break;
-                        case 4:
-                            Console.Clear();
+                switch (choix)
+                {
+                    case 0:
+                        MenuMatch(player);
+                        break;
+                    case 1:
+                        MenuHistory(player);
+                        break;
+                    case 2:
+                        MenuList(player);
+                        break;
+                    case 3:
+                        Console.Clear();
+                        end = true;
+                        res = false;
+                        break;
+                    case 4:
+                        Console.Clear();
+                        Console.WriteLine("Voulez vous vraiment quitter le jeu?\n0. -> Oui\t1. -> Non");
+                        if (!MenuTORChoice())
+                        {
                             end = true;
                             res = true;
-                            break;
-                        case 5:
-                            MenuDeletePlayer(player);
-                            end = true;
-                            res = false;
-                            break;
-                    }
+                        }
+                        break;
+                    case 5:
+                        MenuDeletePlayer(player);
+                        end = true;
+                        res = false;
+                        break;
                 }
                 
                 
