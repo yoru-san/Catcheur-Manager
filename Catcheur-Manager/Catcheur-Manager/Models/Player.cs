@@ -95,6 +95,11 @@ namespace Catcheur_Manager.Models
 
         }
 
+        public List<Wrestler> SearchWrestler(string search, List<Wrestler> list)
+        {
+            return list.Where(w => w.Name.ToLower().Contains(search.ToLower())).ToList();
+        }
+
         public Match getCurrentMatch()
         {
             return CurrentSeason.CurrentMatch;

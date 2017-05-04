@@ -156,26 +156,50 @@ namespace Catcheur_Manager
         {
             bool end = false;
             int choix = -1;
+            string search = string.Empty;
+            List<Wrestler> list = player.ContactList;
+
+            
 
             while (!end)
             {
                 Console.Clear();
-                Console.WriteLine("Liste des contacts: \n\n0 -> Quitter");
-                player.printContactList(player.ContactList);
-
-                choix = MenuIntParse(0, player.ContactList.Count);
-
-                switch (choix)
+                Console.Write("Liste des contacts: \n(Entrez un nom pour le rechercher -- ENTRER pour reset)\n\n");
+                if (search != "")
                 {
-                    case 0:
-                        end = true;
-                        break;
-
-                        // Ajout éventuel d'un choix pour afficher des détails sur les catcheurs
-                    default:
-                        end = true;
-                        break;
+                    Console.WriteLine($"Recherche: \"{search}\"");
                 }
+                Console.WriteLine("0->Quitter");
+                player.printContactList(list);
+
+
+
+                search = Console.ReadLine();
+
+                if (int.TryParse(search, out choix)){
+                    if (choix < 0 || choix > list.Count)
+                    {
+                        Console.WriteLine($"Erreur: le nombre doit être compris entre {0} et {list.Count}");
+                    }
+                    else
+                    {
+                        if (choix == 0)
+                        {
+                            end = true;
+                        }
+                        else
+                        {
+                            Console.Clear();
+                            Console.WriteLine($"{list[choix-1].ToString()}\n\nAppuyez sur ENTRER pour continuer...");
+                            Console.ReadLine();
+                        }
+                    }
+                }
+                else
+                {
+                    list = player.SearchWrestler(search, player.ContactList);
+                }
+                
 
             }
             Console.Clear();
