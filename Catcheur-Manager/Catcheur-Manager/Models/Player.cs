@@ -142,6 +142,7 @@ namespace Catcheur_Manager.Models
             CurrentSeason.Profit += CurrentSeason.GetLastMatchProfit();
 
             //Gérer convalescence
+            List<Wrestler> convWres;
         }
 
         public static void SerializePlayers()

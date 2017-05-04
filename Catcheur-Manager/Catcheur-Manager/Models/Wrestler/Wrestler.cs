@@ -20,10 +20,13 @@ namespace Catcheur_Manager.Models
         public string Name { get; set; }
         public int lifePoint { get; set; }
         public _status Status { get; set; }
+        public int ConvTime { get; set; }
         public int attackPoint { get; set; }
         public int defensePoint { get; set; }
 
         public string specialDesc { get; set; }
+
+        public Action<Wrestler> Special { get; set; }
 
         public bool isSelected { get; set; }
 
@@ -36,6 +39,13 @@ namespace Catcheur_Manager.Models
         {
             Name = name;
             Status = status;
+        }
+
+        public Wrestler(string name, _status status, Player player, Action<Wrestler> sp)
+        {
+            Name = name;
+            Status = status;
+            Special = sp;
         }
 
         private void hit(Wrestler opponent)
