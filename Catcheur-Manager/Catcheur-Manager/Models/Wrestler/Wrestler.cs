@@ -47,14 +47,14 @@ namespace Catcheur_Manager.Models
 
         private void block(Wrestler opponent)
         {
-            opponent.attackPoint -= defensePoint;
+            lifePoint -= (opponent.attackPoint - defensePoint);
             Console.WriteLine($"{Name} se défend ! ");
 
         }
 
         private void specialAttack()
         {
-            Console.WriteLine($"{Name} fait son attaque spécial ! ");
+            Console.WriteLine($"{Name} fait son attaque spéciale ! ");
 
         }
 

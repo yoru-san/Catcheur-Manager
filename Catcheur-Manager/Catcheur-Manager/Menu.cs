@@ -99,39 +99,47 @@ namespace Catcheur_Manager
 
             while (!end)
             {
-                Console.Clear();
-                Console.WriteLine($" --- {player.Name} --- \n\nBénéfices: {player.Money}\tSaison {player.CurrentSeason.id} - Match {player.getCurrentMatch().getMatchNum()}\n\n0. -> Créer le match de samedi prochain\n"+ 
-                    $"1. -> Consulter l'historique des matchs\n2. -> Consulter la base des contacts\n3. -> Changer de personnage\n4. -> Quitter le jeu\n5. -> Supprimer le personnage");
-
-                choix = MenuIntParse(0, 5);
-
-                switch (choix)
+                if (player.getAvailableWrestler().Count <= 2)
                 {
-                    case 0:
-                        MenuMatch(player);
-                        break;
-                    case 1:
-                        MenuHistory(player);
-                        break;
-                    case 2:
-                        MenuList(player);
-                        break;
-                    case 3:
-                        Console.Clear();
-                        end = true;
-                        res = false;
-                        break;
-                    case 4:
-                        Console.Clear();
-                        end = true;
-                        res = true;
-                        break;
-                    case 5:
-                        MenuDeletePlayer(player);
-                        end = true;
-                        res = false;
-                        break;
+                    MenuGameOver(player);
                 }
+                else
+                {
+                    Console.Clear();
+                    Console.WriteLine($" --- {player.Name} --- \n\nBénéfices: {player.Money}\tSaison {player.CurrentSeason.id} - Match {player.getCurrentMatch().getMatchNum()}\n\n0. -> Créer le match de samedi prochain\n" +
+                        $"1. -> Consulter l'historique des matchs\n2. -> Consulter la base des contacts\n3. -> Changer de personnage\n4. -> Quitter le jeu\n5. -> Supprimer le personnage");
+
+                    choix = MenuIntParse(0, 5);
+
+                    switch (choix)
+                    {
+                        case 0:
+                            MenuMatch(player);
+                            break;
+                        case 1:
+                            MenuHistory(player);
+                            break;
+                        case 2:
+                            MenuList(player);
+                            break;
+                        case 3:
+                            Console.Clear();
+                            end = true;
+                            res = false;
+                            break;
+                        case 4:
+                            Console.Clear();
+                            end = true;
+                            res = true;
+                            break;
+                        case 5:
+                            MenuDeletePlayer(player);
+                            end = true;
+                            res = false;
+                            break;
+                    }
+                }
+                
                 
             }
             return res;
@@ -323,6 +331,11 @@ namespace Catcheur_Manager
                 return true;
             }
             
+        }
+
+        static void MenuGameOver(Player player)
+        {
+         Console.WriteLine($"GAME OVER \nVous avez perdu car vous avez moins de 2 catcheurs dans votre base de contact ! Votre score : {player.Money} euros");
         }
 
     }

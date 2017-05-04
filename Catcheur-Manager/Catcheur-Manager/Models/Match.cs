@@ -152,7 +152,7 @@ namespace Catcheur_Manager.Models
         {
             ChooseBeginner();
             timer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
-            timer.Interval = 2000;
+            timer.Interval = 1000;
             timer.Enabled = true;
 
             while(!isEnd)
