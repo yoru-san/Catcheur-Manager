@@ -44,7 +44,7 @@ namespace Catcheur_Manager.Models
             generateBaseContacts();
             PlayerList.Add(this);
 
-            SerializePlayers();
+            //SerializePlayers();
 
            
             
@@ -133,7 +133,7 @@ namespace Catcheur_Manager.Models
         public void Delete()
         {
             PlayerList.Remove(this);
-            SerializePlayers();
+            //SerializePlayers();
         }
 
         public void UpdateStats()
