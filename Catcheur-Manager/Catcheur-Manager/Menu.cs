@@ -150,7 +150,7 @@ namespace Catcheur_Manager
                             Console.WriteLine("Voulez vous vraiment quitter le jeu?\n0. -> Oui\t1. -> Non");
                             if (!MenuTORChoice())
                             {
-                                Player.SerializePlayers();
+                                //Player.SerializePlayers();
                                 end = true;
                                 res = true;
                             }

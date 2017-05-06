@@ -12,7 +12,7 @@ namespace Catcheur_Manager.Models
     [XmlInclude(typeof(Wrestler_Brute))]
     public abstract class Wrestler : ISearchable
     {
-        
+        public delegate void Special(Wrestler instance, Wrestler opponent);
 
         //public static List<Wrestler> AvailableWrestler { get; set; } = new List<Wrestler>();
 
@@ -26,7 +26,7 @@ namespace Catcheur_Manager.Models
 
         public string specialDesc { get; set; }
 
-        public Action<Wrestler> Special { get; set; }
+        public Special SpecialAttack { get; set; }
 
         public bool isSelected { get; set; }
 
@@ -41,14 +41,14 @@ namespace Catcheur_Manager.Models
             Status = status;
         }
 
-        public Wrestler(string name, _status status, Player player, Action<Wrestler> sp)
+        public Wrestler(string name, _status status, Player player, Special sp)
         {
             Name = name;
             Status = status;
-            Special = sp;
+            SpecialAttack = sp;
         }
 
-        private void hit(Wrestler opponent)
+        public void Hit(Wrestler opponent)
         {
             opponent.lifePoint -= attackPoint;
             Console.WriteLine($"{Name} attaque ! ");
@@ -71,7 +71,7 @@ namespace Catcheur_Manager.Models
             switch (rand)
             {
                 case 0:
-                    hit(opponent);
+                    Hit(opponent);
                     break;
 
                 case 1:
@@ -79,7 +79,7 @@ namespace Catcheur_Manager.Models
                     break;
 
                 case 2:
-                    Special(opponent);
+                    SpecialAttack(this, opponent);
                     Console.WriteLine($"{this.Name} lance son attaque spéciale" );
                     break;
             }

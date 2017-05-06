@@ -22,109 +22,117 @@ namespace Catcheur_Manager.Models
             return pct.Next(1, 101);      
         }
 
-        public static Action<Wrestler> OPF = delegate (Wrestler target)
+        public static void OPF(Wrestler instance, Wrestler opponent)
         {
             if (Special_attack.GetProbability() <= 30)
             {
+                opponent.attackPoint = 0;
 
             }
-        };
+        }
 
-        public static Action<Wrestler> JS = delegate (Wrestler target)
+        public static void JS(Wrestler instance, Wrestler opponent)
         {
             if (Special_attack.GetProbability() <= 40)
             {
-
+                instance.lifePoint += 5;
             }
             if (Special_attack.GetProbability() <= 60)
             {
-
+                instance.defensePoint += 1;
             }
-        };
+        }
 
-        public static Action<Wrestler> TH = delegate (Wrestler target)
+        public static void TH(Wrestler instance, Wrestler opponent)
         {
             if (Special_attack.GetProbability() <= 20)
             {
-
+                instance.attackPoint += 2;
+                instance.lifePoint -= 1;
             }
-        };
+        }
 
-        public static Action<Wrestler> DP = delegate (Wrestler target)
+        public static void DP(Wrestler instance, Wrestler opponent)
         {
             if (Special_attack.GetProbability() <= 10)
             {
-
+                opponent.lifePoint -= 3;
+                instance.lifePoint += 3;
+                instance.Hit(opponent);
             }
             if (Special_attack.GetProbability() <= 30)
             {
-
+                instance.lifePoint += 2;
             }
             if (Special_attack.GetProbability() <= 10)
             {
-
+                instance.defensePoint += 1;
             }
-        };
+        }
 
-        public static Action<Wrestler> JN = delegate (Wrestler target)
+        public static void JN(Wrestler instance, Wrestler opponent)
         {
             if (Special_attack.GetProbability() <= 30)
             {
+                opponent.attackPoint = 0;
 
             }
-        };
+        }
 
-        public static Action<Wrestler> M = delegate (Wrestler target)
+        public static void M(Wrestler instance, Wrestler target)
         {
             if (Special_attack.GetProbability() <= 40)
             {
-
+                instance.defensePoint += 4;
+                instance.attackPoint = 1;
             }
-        };
+        }
 
-        public static Action<Wrestler> JC = delegate (Wrestler target)
+        public static void JC(Wrestler instance, Wrestler opponent)
         {
             if (Special_attack.GetProbability() <= 20)
             {
-
+                instance.attackPoint += 2;
+                instance.lifePoint -= 1;
             }
-        };
+        }
 
-        public static Action<Wrestler> JR = delegate (Wrestler target)
+        public static void JR(Wrestler instance, Wrestler opponent)
         {
             if (Special_attack.GetProbability() <= 30)
             {
-
+                opponent.attackPoint = 0;
             }
-        };
+        }
 
-        public static Action<Wrestler> RM = delegate (Wrestler target)
+        public static void RM(Wrestler instance, Wrestler opponent)
         {
             if (Special_attack.GetProbability() <= 40)
             {
-
+                instance.lifePoint -= 3;
             }
             else
             {
-
+                instance.attackPoint += 1;
+                instance.defensePoint += 2;
             }
-        };
+        }
 
-        public static Action<Wrestler> CH = delegate (Wrestler target)
+        public static void CH(Wrestler instance, Wrestler opponent)
         {
             if (Special_attack.GetProbability() <= 30)
             {
-
+                opponent.attackPoint = 0;
             }
-        };
+        }
 
-        public static Action<Wrestler> BB = delegate (Wrestler target)
+        public static void BB(Wrestler instance, Wrestler opponent)
         {
             if (Special_attack.GetProbability() <= 8)
             {
-
+                opponent.lifePoint = 0; 
             }
-        };
+        }
 
 
     }
