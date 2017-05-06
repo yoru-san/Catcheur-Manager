@@ -3,12 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace Catcheur_Manager.Models
 {
-    class Special_attack
+    [XmlInclude(typeof(Special_attack))]
+    public class Special_attack
     {
-        public Random percent { get; set; }
+        public Special_attack()
+        {
+            //XML only
+        }
+        public static Random percent { get; set; }
 
         public static int GetProbability()
         {

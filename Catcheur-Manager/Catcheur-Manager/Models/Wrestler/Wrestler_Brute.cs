@@ -29,5 +29,10 @@ namespace Catcheur_Manager.Models
         {
             return "Brute";
         }
+
+        public override void SetMaxLife()
+        {
+            lifePoint = 100;
+        }
     }
 }

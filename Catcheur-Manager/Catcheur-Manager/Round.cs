@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 
 namespace Catcheur_Manager
 {
-    [XmlInclude(typeof(Season))]
+    [XmlInclude(typeof(Round))]
     public class Round
     {
         public int ID { get; set; }

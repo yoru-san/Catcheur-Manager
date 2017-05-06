@@ -10,7 +10,7 @@ using System.Xml.Serialization;
 namespace Catcheur_Manager
 {
     [XmlInclude(typeof(Highscore))]
-    class Highscore : ISearchable
+    public class Highscore : ISearchable
     {
         public static List<Highscore> Scores { get; set; } = new List<Highscore>();
 

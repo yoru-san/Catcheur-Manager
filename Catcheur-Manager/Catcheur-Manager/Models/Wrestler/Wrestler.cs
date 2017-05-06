@@ -152,6 +152,20 @@ namespace Catcheur_Manager.Models
             }
         }
 
+        public void DecreaseConvTime()
+        {
+            ConvTime--;
+            if (ConvTime <= 0)
+            {
+                Status = _status.Disponible;
+                SetMaxLife();
+
+                Console.WriteLine($"{Name} s'est remis de ses blessures et est de nouveau disponible!");
+            }
+        }
+
+        public abstract void SetMaxLife();
+
         public override string ToString()
         {
             return $"{Name} :"

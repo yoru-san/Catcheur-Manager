@@ -29,5 +29,10 @@ namespace Catcheur_Manager.Models
         {
             return "Agile";
         }
+
+        public override void SetMaxLife()
+        {
+            lifePoint = 125;
+        }
     }
 }

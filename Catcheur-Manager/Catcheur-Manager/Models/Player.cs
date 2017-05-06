@@ -10,6 +10,10 @@ using System.Xml.Serialization;
 namespace Catcheur_Manager.Models
 {
     [XmlInclude(typeof(Player))]
+    [XmlInclude(typeof(List<Season>))]
+    [XmlInclude(typeof(Action))]
+    [XmlInclude(typeof(Action<Wrestler>))]
+
     public class Player
     {
         public int SeasonId { get; set; }
@@ -100,14 +104,16 @@ namespace Catcheur_Manager.Models
 
 
 
-        public List<Wrestler> getAvailableWrestler()
+        public List<Wrestler> getWrestlerList(Wrestler._status status)
         {
-            return ContactList.Where(w => w.Status == Wrestler._status.Disponible && !w.isSelected).ToList().OrderBy(w => w.Name).ToList();
+            return ContactList.Where(w => w.Status == status && !w.isSelected).ToList().OrderBy(w => w.Name).ToList();
         }
+
+
 
         public Wrestler SelectWrestler(int index)
         {
-            Wrestler selectedWrestler = getAvailableWrestler()[index];
+            Wrestler selectedWrestler = getWrestlerList(Wrestler._status.Disponible)[index];
             selectedWrestler.isSelected = true;
             return selectedWrestler;
 
@@ -141,8 +147,12 @@ namespace Catcheur_Manager.Models
             Money += CurrentSeason.GetLastMatchProfit();
             CurrentSeason.Profit += CurrentSeason.GetLastMatchProfit();
 
-            //Gérer convalescence
-            List<Wrestler> convWres;
+            List<Wrestler> convWres = getWrestlerList(Wrestler._status.En_Convalescence);
+
+            foreach (Wrestler wres in convWres)
+            {
+                wres.DecreaseConvTime();
+            }
         }
 
         public static void SerializePlayers()
