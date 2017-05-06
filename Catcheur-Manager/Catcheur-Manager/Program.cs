@@ -30,7 +30,7 @@ namespace Catcheur_Manager
 
             if (new FileInfo("players.xml").Length > 0)
             {
-                Player.DeserializePlayers();
+                //Player.DeserializePlayers();
             }
             if (new FileInfo("highscores.xml").Length > 0)
             {

@@ -16,19 +16,20 @@ namespace Catcheur_Manager.Models
             return pct.Next(1, 101);      
         }
 
-        public static Action<Wrestler> OPF = delegate (Wrestler target)
+        public static Action<Wrestler> OPF = delegate (Wrestler opponent)
         {
             if (Special_attack.GetProbability() <= 30)
             {
-
+                opponent.attackPoint = 0;
+                
             }
         };
 
-        public static Action<Wrestler> JS = delegate (Wrestler target)
+        public static Action<Wrestler> JS = delegate (Wrestler opponent)
         {
             if (Special_attack.GetProbability() <= 40)
             {
-
+               
             }
             if (Special_attack.GetProbability() <= 60)
             {
@@ -36,7 +37,7 @@ namespace Catcheur_Manager.Models
             }
         };
 
-        public static Action<Wrestler> TH = delegate (Wrestler target)
+        public static Action<Wrestler> TH = delegate (Wrestler opponent)
         {
             if (Special_attack.GetProbability() <= 20)
             {
@@ -44,7 +45,7 @@ namespace Catcheur_Manager.Models
             }
         };
 
-        public static Action<Wrestler> DP = delegate (Wrestler target)
+        public static Action<Wrestler> DP = delegate (Wrestler opponent)
         {
             if (Special_attack.GetProbability() <= 10)
             {
@@ -60,10 +61,11 @@ namespace Catcheur_Manager.Models
             }
         };
 
-        public static Action<Wrestler> JN = delegate (Wrestler target)
+        public static Action<Wrestler> JN = delegate (Wrestler opponent)
         {
             if (Special_attack.GetProbability() <= 30)
             {
+                opponent.attackPoint = 0;
 
             }
         };
@@ -72,11 +74,11 @@ namespace Catcheur_Manager.Models
         {
             if (Special_attack.GetProbability() <= 40)
             {
-
+                
             }
         };
 
-        public static Action<Wrestler> JC = delegate (Wrestler target)
+        public static Action<Wrestler> JC = delegate (Wrestler opponent)
         {
             if (Special_attack.GetProbability() <= 20)
             {
@@ -84,15 +86,15 @@ namespace Catcheur_Manager.Models
             }
         };
 
-        public static Action<Wrestler> JR = delegate (Wrestler target)
+        public static Action<Wrestler> JR = delegate (Wrestler opponent)
         {
             if (Special_attack.GetProbability() <= 30)
             {
-
+                opponent.attackPoint = 0;
             }
         };
 
-        public static Action<Wrestler> RM = delegate (Wrestler target)
+        public static Action<Wrestler> RM = delegate (Wrestler opponent)
         {
             if (Special_attack.GetProbability() <= 40)
             {
@@ -104,19 +106,19 @@ namespace Catcheur_Manager.Models
             }
         };
 
-        public static Action<Wrestler> CH = delegate (Wrestler target)
+        public static Action<Wrestler> CH = delegate (Wrestler opponent)
         {
             if (Special_attack.GetProbability() <= 30)
             {
-
+                opponent.attackPoint = 0;
             }
         };
 
-        public static Action<Wrestler> BB = delegate (Wrestler target)
+        public static Action<Wrestler> BB = delegate (Wrestler opponent)
         {
             if (Special_attack.GetProbability() <= 8)
             {
-
+                opponent.lifePoint = 0; 
             }
         };
 
