@@ -56,17 +56,17 @@ namespace Catcheur_Manager.Models
 
         public void generateBaseContacts()
         {
-            new Wrestler_Brute("Judy Sunny", Wrestler._status.Disponible, this, 1);
-            new Wrestler_Agile("Triple Hache", Wrestler._status.Disponible, this, 2);
-            new Wrestler_Agile("Dead Poule", Wrestler._status.Disponible, this, 3);
-            new Wrestler_Brute("L'ordonnateur des pompes funèbres", Wrestler._status.Disponible, this, 0);
-            new Wrestler_Brute("Jarvan cinquième du nom", Wrestler._status.En_Convalescence,this, 4);
-            new Wrestler_Agile("Madusa", Wrestler._status.Disponible, this, 5);
-            new Wrestler_Agile("John Cinéma", Wrestler._status.En_Convalescence, this, 6);
-            new Wrestler_Brute("Jeff Radis", Wrestler._status.En_Convalescence, this, 7);
-            new Wrestler_Brute("Raie Mystérieuse", Wrestler._status.Disponible, this, 8);
-            new Wrestler_Brute("Chris Hart", Wrestler._status.Disponible, this, 9);
-            new Wrestler_Agile("Bret Benoit", Wrestler._status.Disponible, this, 10);
+            new Wrestler_Brute("Judy Sunny", Wrestler._status.Disponible, this, 1, Special_attack.JS_desc);
+            new Wrestler_Agile("Triple Hache", Wrestler._status.Disponible, this, 2, Special_attack.TH_desc);
+            new Wrestler_Agile("Dead Poule", Wrestler._status.Disponible, this, 3, Special_attack.DP_desc);
+            new Wrestler_Brute("L'ordonnateur des pompes funèbres", Wrestler._status.Disponible, this, 0, Special_attack.OPF_desc);
+            new Wrestler_Brute("Jarvan cinquième du nom", Wrestler._status.En_Convalescence,this, 4, Special_attack.JN_desc);
+            new Wrestler_Agile("Madusa", Wrestler._status.Disponible, this, 5, Special_attack.M_desc);
+            new Wrestler_Agile("John Cinéma", Wrestler._status.En_Convalescence, this, 6, Special_attack.JC_desc);
+            new Wrestler_Brute("Jeff Radis", Wrestler._status.En_Convalescence, this, 7, Special_attack.JR_desc);
+            new Wrestler_Brute("Raie Mystérieuse", Wrestler._status.Disponible, this, 8, Special_attack.RM_desc);
+            new Wrestler_Brute("Chris Hart", Wrestler._status.Disponible, this, 9, Special_attack.CH_desc);
+            new Wrestler_Agile("Bret Benoit", Wrestler._status.Disponible, this, 10, Special_attack.BB_desc);
 
         }
 

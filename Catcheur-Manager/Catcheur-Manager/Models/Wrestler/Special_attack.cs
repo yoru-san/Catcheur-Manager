@@ -38,7 +38,9 @@ namespace Catcheur_Manager.Models
         }
 
 
+        public static string OPF_desc = "30% de chance d'annuler une attaque";
 
+        //Marche avec l'Action<> ou une simple fonction
         public static Action<Wrestler, Wrestler> OPF = delegate (Wrestler instance, Wrestler opponent)
         {
             if (Special_attack.GetProbability() <= 30)
@@ -47,10 +49,10 @@ namespace Catcheur_Manager.Models
 
             }
         };
-        
 
 
 
+        public static string JS_desc = "40% de chance de regagner 5 points de vie (ne peut dépasser la vie max), 60% de chance de parer 1 dégât supplémentaire";
         public static void JS(Wrestler instance, Wrestler opponent)
         {
             if (Special_attack.GetProbability() <= 40)
@@ -63,6 +65,7 @@ namespace Catcheur_Manager.Models
             }
         }
 
+        public static string TH_desc = $"20% de chance d’infliger 2 dégâts supplémentaires mais perd alors 1 point de vie";
         public static void TH(Wrestler instance, Wrestler opponent)
         {
             if (Special_attack.GetProbability() <= 20)
@@ -72,6 +75,7 @@ namespace Catcheur_Manager.Models
             }
         }
 
+        public static string DP_desc = "10% de chance de subtiliser 3 pvs de &l’ennemie en plus de l’attaque, 30% de chances de se soigner de 2 pvs et 10% de chances de parer 1 dégat";
         public static void DP(Wrestler instance, Wrestler opponent)
         {
             if (Special_attack.GetProbability() <= 10)
@@ -90,6 +94,7 @@ namespace Catcheur_Manager.Models
             }
         }
 
+        public static string JN_desc = "30% de chance d’annuler une attaque";
         public static void JN(Wrestler instance, Wrestler opponent)
         {
             if (Special_attack.GetProbability() <= 30)
@@ -99,6 +104,7 @@ namespace Catcheur_Manager.Models
             }
         }
 
+        public static string M_desc = "40% de chance de se protéger contre 4 points de dégâts, mais n’en inflige qu’un seul durant le tour";
         public static void M(Wrestler instance, Wrestler target)
         {
             if (Special_attack.GetProbability() <= 40)
@@ -108,6 +114,7 @@ namespace Catcheur_Manager.Models
             }
         }
 
+        public static string JC_desc = "20% de chance d’infliger 2 dégâts supplémentaires mais perd alors 1 point de vie";   
         public static void JC(Wrestler instance, Wrestler opponent)
         {
             if (Special_attack.GetProbability() <= 20)
@@ -117,6 +124,7 @@ namespace Catcheur_Manager.Models
             }
         }
 
+        public static string JR_desc = "30% de chance d’annuler une attaque";
         public static void JR(Wrestler instance, Wrestler opponent)
         {
             if (Special_attack.GetProbability() <= 30)
@@ -125,6 +133,7 @@ namespace Catcheur_Manager.Models
             }
         }
 
+        public static string RM_desc = "40% de chance de s’infliger 3 dégâts, sinon inflige 1 dégât supplémentaire et se protège de 2 dégâts infligés";
         public static void RM(Wrestler instance, Wrestler opponent)
         {
             if (Special_attack.GetProbability() <= 40)
@@ -138,6 +147,7 @@ namespace Catcheur_Manager.Models
             }
         }
 
+        public static string CH_desc = "30% de chance d’annuler une attaque";
         public static void CH(Wrestler instance, Wrestler opponent)
         {
             if (Special_attack.GetProbability() <= 30)
@@ -146,6 +156,7 @@ namespace Catcheur_Manager.Models
             }
         }
 
+        public static string BB_desc = "8% de chance de mettre instantanément K.O l’adversaire";
         public static void BB(Wrestler instance, Wrestler opponent)
         {
             if (Special_attack.GetProbability() <= 8)

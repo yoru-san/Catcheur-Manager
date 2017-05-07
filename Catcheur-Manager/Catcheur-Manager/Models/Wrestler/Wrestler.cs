@@ -50,7 +50,15 @@ namespace Catcheur_Manager.Models
             Name = name;
             Status = status;
             SpecialAttackIndex = sp;
-        } 
+        }
+
+        public Wrestler(string name, _status status, Player player, int sp, string sp_desc)
+        {
+            Name = name;
+            Status = status;
+            SpecialAttackIndex = sp;
+            specialDesc = sp_desc;
+        }
 
         public void Hit(Wrestler opponent)
         {
@@ -181,7 +189,7 @@ namespace Catcheur_Manager.Models
                 //+ {Description}
                 + $"\n\nStatut : {GetStringStatus()}\n"
                 + $"Points de vie:\t\t{lifePoint}\nPoints d'attaque:\t{attackPoint}\nPoints de défense:\t{defensePoint}\n"
-                //+ $"\nAttaque spéciale: {specialDesc}"
+                + $"\nAttaque spéciale: {specialDesc}"
                 + "\n\n";
         }
 
