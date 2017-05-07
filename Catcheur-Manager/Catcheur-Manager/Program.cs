@@ -13,6 +13,23 @@ namespace Catcheur_Manager
     
     class Program
     {
+        public static void Loader()
+        {
+            FileCheck("players.xml");
+            FileCheck("highscores.xml");
+
+            if (new FileInfo("players.xml").Length > 0)
+            {
+                Player.DeserializePlayers();
+            }
+            if (new FileInfo("highscores.xml").Length > 0)
+            {
+                Highscore.DeserializeHighscores();
+            }
+
+            Special_attack.BuildAttackList();
+
+        }
         public static void FileCheck(string file)
         {
             if (!File.Exists(file))
@@ -25,17 +42,7 @@ namespace Catcheur_Manager
         //Action<T>
         static void Main(string[] args)
         {
-            FileCheck("players.xml");
-            FileCheck("highscores.xml");
-
-            if (new FileInfo("players.xml").Length > 0)
-            {
-                //Player.DeserializePlayers();
-            }
-            if (new FileInfo("highscores.xml").Length > 0)
-            {
-                Highscore.DeserializeHighscores();
-            }
+            Loader();
             Menu.MenuStart();
 
         }

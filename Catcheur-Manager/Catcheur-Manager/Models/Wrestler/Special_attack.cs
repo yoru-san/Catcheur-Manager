@@ -7,29 +7,49 @@ using System.Xml.Serialization;
 
 namespace Catcheur_Manager.Models
 {
-    [XmlInclude(typeof(Special_attack))]
-    public class Special_attack
+
+    public static class Special_attack
     {
-        public Special_attack()
-        {
-            //XML only
-        }
         public static Random percent { get; set; }
+
+        public static List<Action<Wrestler, Wrestler>> AttackList = new List<Action<Wrestler, Wrestler>>();
+
+        public static void BuildAttackList()
+        {
+            AttackList.Add(OPF); //0
+            AttackList.Add(JS); //1
+            AttackList.Add(TH); //2
+            AttackList.Add(DP); //3
+            AttackList.Add(JN); //4
+            AttackList.Add(M);  //5
+            AttackList.Add(JC); //6
+            AttackList.Add(JR); //7
+            AttackList.Add(RM); //8
+            AttackList.Add(CH); //9
+            AttackList.Add(BB); //10
+
+
+        }
 
         public static int GetProbability()
         {
             Random pct = new Random();
-            return pct.Next(1, 101);      
+            return pct.Next(1, 101); 
         }
 
-        public static void OPF(Wrestler instance, Wrestler opponent)
+
+
+        public static Action<Wrestler, Wrestler> OPF = delegate (Wrestler instance, Wrestler opponent)
         {
             if (Special_attack.GetProbability() <= 30)
             {
                 opponent.attackPoint = 0;
 
             }
-        }
+        };
+        
+
+
 
         public static void JS(Wrestler instance, Wrestler opponent)
         {
@@ -134,6 +154,7 @@ namespace Catcheur_Manager.Models
             }
         }
 
+        
 
     }
 }

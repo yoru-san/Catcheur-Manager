@@ -10,9 +10,11 @@ namespace Catcheur_Manager.Models
     [XmlInclude(typeof(Wrestler))]
     [XmlInclude(typeof(Wrestler_Agile))]
     [XmlInclude(typeof(Wrestler_Brute))]
+
+
     public abstract class Wrestler : ISearchable
     {
-        public delegate void Special(Wrestler instance, Wrestler opponent);
+        //public delegate void Special(Wrestler instance, Wrestler opponent);
 
         //public static List<Wrestler> AvailableWrestler { get; set; } = new List<Wrestler>();
 
@@ -26,7 +28,9 @@ namespace Catcheur_Manager.Models
 
         public string specialDesc { get; set; }
 
-        public Special SpecialAttack { get; set; }
+        /*[XmlIgnore]
+        public Action<Wrestler, Wrestler> SpecialAttack { get; set; }*/
+        public int SpecialAttackIndex { get; set; }
 
         public bool isSelected { get; set; }
 
@@ -41,12 +45,12 @@ namespace Catcheur_Manager.Models
             Status = status;
         }
 
-        public Wrestler(string name, _status status, Player player, Special sp)
+        public Wrestler(string name, _status status, Player player, int sp)
         {
             Name = name;
             Status = status;
-            SpecialAttack = sp;
-        }
+            SpecialAttackIndex = sp;
+        } 
 
         public void Hit(Wrestler opponent)
         {
@@ -60,6 +64,11 @@ namespace Catcheur_Manager.Models
             lifePoint -= (opponent.attackPoint - defensePoint);
             Console.WriteLine($"{Name} se défend ! ");
 
+        }
+
+        private void SpecialAttack(Wrestler opponent)
+        {
+            Special_attack.AttackList[SpecialAttackIndex](this, opponent);
         }
 
 
@@ -79,7 +88,7 @@ namespace Catcheur_Manager.Models
                     break;
 
                 case 2:
-                    SpecialAttack(this, opponent);
+                    SpecialAttack(/*this,*/ opponent);
                     Console.WriteLine($"{this.Name} lance son attaque spéciale" );
                     break;
             }
