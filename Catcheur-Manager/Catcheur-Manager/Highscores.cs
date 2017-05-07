@@ -28,7 +28,7 @@ namespace Catcheur_Manager
         {
             Value = player.Money;
             Name = player.Name;
-            Season = player.CurrentSeason.id;
+            Season = player.getCurrentSeason().id;
             Match = player.getCurrentMatch().id;
         }
 

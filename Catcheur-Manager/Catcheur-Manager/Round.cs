@@ -11,13 +11,13 @@ namespace Catcheur_Manager
     [XmlInclude(typeof(Round))]
     public class Round
     {
-        public int ID { get; set; }
+        public int id { get; set; }
         public string Action { get; set; }
         public Wrestler BeginnerOfMatch { get; set; }
         public int MatchSeason { get; set; }
-        public Round(int id)
+        public Round(int Id)
         {
-            ID = id;
+            id = Id;
         }
 
         public Round()
@@ -27,13 +27,13 @@ namespace Catcheur_Manager
 
         public string ToShortString()
         {
-            return $"Round {ID}";
+            return $"Round {id}";
         }
 
         public override string ToString()
         {
             string res =
-                $"Round {ID}";
+                $"Round {id}";
             return base.ToString();
         }
     }

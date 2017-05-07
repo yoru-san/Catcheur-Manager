@@ -75,7 +75,8 @@ namespace Catcheur_Manager.Models
             isEnd = false;
 
             Iteration = 0;
-            IterationMax = 20;
+            IterationMax = 2; //A CHANGER
+
 
             RoundId = 1;
             Rounds = new List<Round>();
@@ -83,6 +84,10 @@ namespace Catcheur_Manager.Models
             MatchSeason = currentSeason.id;
             currentSeason.CurrentMatch = this;
             currentSeason.MatchHistory.Add(this);
+            Console.WriteLine(currentSeason.id);
+            Console.WriteLine(currentSeason.MatchHistory.Count);
+
+            Console.ReadKey();
 
             FirstWrestler = wres1;
             SecondWrestler = wres2;
@@ -174,7 +179,7 @@ namespace Catcheur_Manager.Models
                 if (!midRound)
                 {
                     Round round = new Round(Iteration+1);
-                    Console.WriteLine($"Round #{round.ID}");
+                    Console.WriteLine($"Round #{round.id}");
                     Profit += 5000;
                 }
 
@@ -232,7 +237,7 @@ namespace Catcheur_Manager.Models
 
         public override string ToString()
         {
-            string res = 
+            string res =
                 $"Saison {MatchSeason} - Match {id}:\n\n"
                 + $"Combattant 1: {FirstWrestler.Name}\nCombattant 2: {SecondWrestler.Name}\n"
                 + $"Gagnant: {Winner.Name} par {GetStringWayOfWinning()}\n"

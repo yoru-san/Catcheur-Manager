@@ -46,7 +46,10 @@ namespace Catcheur_Manager.Models
         {
             return CurrentMatch.Profit * ProfitIncrement;
         }
-
+        public override string ToString()
+        {
+            return MatchHistory.Count.ToString();
+        }
 
     }
 

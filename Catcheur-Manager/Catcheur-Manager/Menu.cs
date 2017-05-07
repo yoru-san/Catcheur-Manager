@@ -124,7 +124,7 @@ namespace Catcheur_Manager
                 else
                 {
                     Console.Clear();
-                    Console.WriteLine($" --- {player.Name} --- \n\nBénéfices: {player.Money}\tSaison {player.CurrentSeason.id} - Match {player.getCurrentMatch().getMatchNum()}\n\n0. -> Créer le match de samedi prochain\n" +
+                    Console.WriteLine($" --- {player.Name} --- \n\nBénéfices: {player.Money}\tSaison {player.getCurrentSeason().id} - Match {player.getCurrentMatch().getMatchNum()}\n\n0. -> Créer le match de samedi prochain\n" +
                         $"1. -> Consulter l'historique des matchs\n2. -> Consulter la base des contacts\n3. -> Changer de personnage\n4. -> Quitter le jeu\n5. -> Supprimer le personnage");
 
                     choix = MenuIntParse(0, 5);
@@ -266,7 +266,7 @@ namespace Catcheur_Manager
 
                             if (choix == 0)
                             {
-                                new Match(wres1, wres2, player.CurrentSeason);
+                                new Match(wres1, wres2, player.getCurrentSeason());
                                 end = true;
                             }
                             else
@@ -332,17 +332,78 @@ namespace Catcheur_Manager
 
         public static void MenuHistory(Player player)
         {
-            Console.Clear();
-            Console.WriteLine("Historique des matchs:\n\n");
-            foreach (Season season in player.SeasonHistory)
+            bool end = false;
+            int choix = -1;
+
+            while (!end)
             {
-                Console.WriteLine($"Saison {season.id}: ");
-                foreach (Match match in season.MatchHistory)
+                Console.Clear();
+                Console.WriteLine("Historique des matchs:\n\n");
+                Console.WriteLine("\n0. -> Quitter\n");
+                foreach (Season season in player.SeasonHistory)
                 {
-                    Console.WriteLine($"\t{match.ToShortString()}");
+                    Console.WriteLine($"{season.id}. Saison {season.id}: {season.MatchHistory.Count}");
+                    foreach (Match match in season.MatchHistory)
+                    {
+                        Console.WriteLine($"\t{match.ToShortString()}");
+                    }
+                }
+                choix = MenuIntParse(0, player.SeasonHistory.Count);
+
+                if (choix != 0)
+                {
+                    MenuHistorySeason(player.SeasonHistory[choix - 1]);
+                }
+                else
+                {
+                    end = true;
                 }
             }
-            Console.ReadLine();
+
+        }
+
+        public static void MenuHistorySeason(Season season)
+        {
+            int choix = -1;
+            bool end = false;
+            while (!end)
+            {
+                Console.Clear();
+                
+                Console.WriteLine(season.ToString());
+                Console.WriteLine("\n0. -> Quitter\n");
+
+                foreach (Match match in season.MatchHistory)
+                {
+                    Console.WriteLine($"{match.id}. {match.ToShortString()}");
+                }
+
+                choix = MenuIntParse(0, season.MatchHistory.Count);
+
+                if (choix != 0)
+                {
+                    MenuHistoryMatch(season.MatchHistory[choix - 1]);
+                }
+                else
+                {
+                    end = true;
+                }
+            }
+
+        }
+
+        public static void MenuHistoryMatch(Match match)
+        {
+            Console.Clear();
+            Console.WriteLine(match.ToString());
+            Console.WriteLine("\n0. -> Quitter\n");
+
+            foreach(Round round in match.Rounds)
+            {
+                Console.WriteLine($"{round.id}. {round.ToShortString()}");
+            }
+            Console.WriteLine("\nAppuyez sur une touche pour continuer...");
+            Console.ReadKey();
         }
 
         public static void MenuHighscores()

@@ -22,7 +22,7 @@ namespace Catcheur_Manager.Models
 
         public List<Wrestler> ContactList { get; set; }
 
-        public Season CurrentSeason { get; set; }
+        //public Season CurrentSeason { get; set; }
 
         public List<Season> SeasonHistory;
 
@@ -41,7 +41,7 @@ namespace Catcheur_Manager.Models
             SeasonId = 1;
             SeasonHistory = new List<Season>();
             SeasonHistory.Add(new Season(this));
-            CurrentSeason = SeasonHistory.Last();
+            //CurrentSeason = SeasonHistory[0];
             ContactList = new List<Wrestler>();
 
             generateBaseContacts();
@@ -60,10 +60,10 @@ namespace Catcheur_Manager.Models
             new Wrestler_Agile("Triple Hache", Wrestler._status.Disponible, this, 2, Special_attack.TH_desc);
             new Wrestler_Agile("Dead Poule", Wrestler._status.Disponible, this, 3, Special_attack.DP_desc);
             new Wrestler_Brute("L'ordonnateur des pompes funèbres", Wrestler._status.Disponible, this, 0, Special_attack.OPF_desc);
-            new Wrestler_Brute("Jarvan cinquième du nom", Wrestler._status.En_Convalescence,this, 4, Special_attack.JN_desc);
+            new Wrestler_Brute("Jarvan cinquième du nom", Wrestler._status.En_Convalescence,this, 4, Special_attack.JN_desc).ConvTime = new Random().Next(2, 6); //On ne connait pas le temps de conv. de base
             new Wrestler_Agile("Madusa", Wrestler._status.Disponible, this, 5, Special_attack.M_desc);
-            new Wrestler_Agile("John Cinéma", Wrestler._status.En_Convalescence, this, 6, Special_attack.JC_desc);
-            new Wrestler_Brute("Jeff Radis", Wrestler._status.En_Convalescence, this, 7, Special_attack.JR_desc);
+            new Wrestler_Agile("John Cinéma", Wrestler._status.En_Convalescence, this, 6, Special_attack.JC_desc).ConvTime = new Random().Next(2,6);
+            new Wrestler_Brute("Jeff Radis", Wrestler._status.En_Convalescence, this, 7, Special_attack.JR_desc).ConvTime = new Random().Next(2, 6);
             new Wrestler_Brute("Raie Mystérieuse", Wrestler._status.Disponible, this, 8, Special_attack.RM_desc);
             new Wrestler_Brute("Chris Hart", Wrestler._status.Disponible, this, 9, Special_attack.CH_desc);
             new Wrestler_Agile("Bret Benoit", Wrestler._status.Disponible, this, 10, Special_attack.BB_desc);
@@ -120,13 +120,18 @@ namespace Catcheur_Manager.Models
 
         public Match getCurrentMatch()
         {
-            return CurrentSeason.CurrentMatch;
+            return getCurrentSeason().CurrentMatch;
+        }
+
+        public Season getCurrentSeason()
+        {
+            return SeasonHistory.Last();
         }
 
         public void EndSeason()
         {
             SeasonHistory.Add(new Season(this));
-            CurrentSeason = SeasonHistory.Last();
+            //CurrentSeason = SeasonHistory.Last();
         }
 
         public override string ToString()
@@ -143,8 +148,8 @@ namespace Catcheur_Manager.Models
 
         public void UpdateStats()
         {
-            Money += CurrentSeason.GetLastMatchProfit();
-            CurrentSeason.Profit += CurrentSeason.GetLastMatchProfit();
+            Money += getCurrentSeason().GetLastMatchProfit();
+            getCurrentSeason().Profit += getCurrentSeason().GetLastMatchProfit();
 
             List<Wrestler> convWres = getWrestlerList(Wrestler._status.En_Convalescence);
 
@@ -152,6 +157,8 @@ namespace Catcheur_Manager.Models
             {
                 wres.DecreaseConvTime();
             }
+
+            SerializePlayers();
         }
 
         public static void SerializePlayers()
