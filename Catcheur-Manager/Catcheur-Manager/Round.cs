@@ -13,10 +13,8 @@ namespace Catcheur_Manager
     {
         public enum action {Attack = 0, Block = 1, Special = 3};
         public int id { get; set; }
-        public string Action { get; set; }
         public Wrestler Beginner { get; set; }
         public action FirstAction { get; set; }
-
        
         public Wrestler Second { get; set; }
         public action SecondAction { get; set; }
