@@ -43,7 +43,7 @@ namespace Catcheur_Manager
         static void Main(string[] args)
         {
             Console.Title = "Catcheur-Manager";
-            Console.SetWindowSize(100, 80);
+            //Console.SetWindowSize(100, 80);
             Loader();
             Menu.MenuStart();
 
