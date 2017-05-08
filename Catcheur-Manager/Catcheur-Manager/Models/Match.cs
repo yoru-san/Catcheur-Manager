@@ -275,11 +275,11 @@ namespace Catcheur_Manager.Models
                 + $"Nombre de rounds: {Iteration}/{IterationMax}\n"
                 + $"Profit: {Profit}";
 
-            foreach (Round round in Rounds)
+            /*foreach (Round round in Rounds) //pas implémenté
             {
                 res += round.ToShortString();
             }
-
+            */
             return res;
         }
 
