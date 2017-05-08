@@ -28,7 +28,8 @@ namespace Catcheur_Manager.Models
 
         public int SeasonId { get; set; }
 
-        public int RoundId { get; set; }
+        //public int RoundId { get; set; }
+        public Round CurrentRound { get; set; }
 
         public List<Round> Rounds { get; set; }
 
@@ -78,7 +79,7 @@ namespace Catcheur_Manager.Models
             IterationMax = 2; //A CHANGER
 
 
-            RoundId = 1;
+            //RoundId = 1;
             Rounds = new List<Round>();
 
             MatchSeason = currentSeason.id;
@@ -117,13 +118,13 @@ namespace Catcheur_Manager.Models
         {
             if (Loser.lifePoint <= 0)
             {
-                Console.WriteLine($"{Winner.Name} gagnant par K.O");
+                Console.WriteLine($"\n{Winner.Name} gagnant par K.O");
                 WayOfWinning = true;
             }
 
             else if (Iteration == IterationMax)
             {
-                Console.WriteLine($"{Winner.Name} remporte le combat par délai avec {Iteration} rounds au compteur !");
+                Console.WriteLine($"\n{Winner.Name} remporte le combat par délai avec {Iteration} rounds au compteur !");
                 WayOfWinning = false;
             }
 
@@ -136,14 +137,35 @@ namespace Catcheur_Manager.Models
                 //Console.WriteLine($"C'est le catcheur {FirstWrestler.Name} qui remporte la victoire");
                 Winner = FirstWrestler;
                 Loser = SecondWrestler;
-                SecondWrestler.DeterminateStatus(FirstWrestler);
             }
             else
             {
                //Console.WriteLine($"C'est le catcheur {SecondWrestler.Name} qui gagne");
                 Winner = SecondWrestler;
                 Loser = FirstWrestler;
-                FirstWrestler.DeterminateStatus(SecondWrestler);
+            }
+        }
+
+        public void DeterminateWrestlersStatus()
+        {
+            if (WayOfWinning) // Victoire par K.O
+            {
+                if (Loser.lifePoint < 1) // VERIFICATION
+                {
+                    Console.WriteLine($"{Loser.Name} est hors d'état et ne pourra plus combattre");
+                    Loser.Status = Wrestler._status.Hors_d_etat;
+                }
+                if (Winner.lifePoint < Winner.GetMaxLife()/2)
+                {
+                    Winner.SetConvalescent();
+                }
+            }
+            else
+            {
+                Console.WriteLine($"{Winner.Name} est soigné et récupère toute sa vie");
+                Winner.SetMaxLife();
+
+                Loser.SetConvalescent();
             }
         }
 
@@ -153,6 +175,7 @@ namespace Catcheur_Manager.Models
         {
             DeterminateWinner();
             DeterminateWayOfWinning();
+            DeterminateWrestlersStatus();
             CalculateProfit();
         }
 
@@ -178,33 +201,44 @@ namespace Catcheur_Manager.Models
             {
                 if (!midRound)
                 {
-                    Round round = new Round(Iteration+1);
-                    Console.WriteLine($"Round #{round.id}");
+                    Rounds.Add(new Round(Iteration+1));
+                    CurrentRound = Rounds.Last();
+                    Console.WriteLine($"\nRound #{CurrentRound.id}");
                     Profit += 5000;
-                }
 
+                    Console.WriteLine($"C'est au tour de {WrestlerRound.Name} !");
+                    CurrentRound.Beginner = WrestlerRound;
+                    CurrentRound.FirstAction = WrestlerRound.ChooseAction(SecondWrestler);
 
-                if (WrestlerRound == null || WrestlerRound == FirstWrestler)
-                {
-                    Console.WriteLine($"C'est au tour de {FirstWrestler.Name} !");
-                    FirstWrestler.ChooseAction(SecondWrestler);
-                    WrestlerRound = SecondWrestler;
-                    
+                    if (WrestlerRound == FirstWrestler)
+                    {
+                        WrestlerRound = SecondWrestler;
+                    }
+                    else
+                    {
+                        WrestlerRound = FirstWrestler;
+                    }
+
+                    midRound = true;
                 }
                 else
                 {
-                    Console.WriteLine($"C'est au tour de {SecondWrestler.Name} !");
-                    SecondWrestler.ChooseAction(FirstWrestler);
-                    WrestlerRound = FirstWrestler;
-                }
-
-                if (midRound)
-                {
+                    Console.WriteLine($"C'est au tour de {WrestlerRound.Name} !");
+                    CurrentRound.Second = WrestlerRound;
+                    CurrentRound.SecondAction = WrestlerRound.ChooseAction(FirstWrestler);
+                    if (WrestlerRound == FirstWrestler)
+                    {
+                        WrestlerRound = SecondWrestler;
+                    }
+                    else
+                    {
+                        WrestlerRound = FirstWrestler;
+                    }
                     midRound = false;
+
+                    CurrentRound.PlayRound();
                     Iteration++;
                 }
-                else
-                    midRound = true;
             }
             else
             {

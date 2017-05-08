@@ -34,5 +34,10 @@ namespace Catcheur_Manager.Models
         {
             lifePoint = 125;
         }
+
+        public override int GetMaxLife()
+        {
+            return 125;
+        }
     }
 }

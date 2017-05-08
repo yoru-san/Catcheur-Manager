@@ -63,24 +63,24 @@ namespace Catcheur_Manager.Models
         public void Hit(Wrestler opponent)
         {
             opponent.lifePoint -= attackPoint;
-            Console.WriteLine($"{Name} attaque ! ");
+            
 
         }
 
-        private void block(Wrestler opponent)
+        public void Block(Wrestler opponent)
         {
             lifePoint -= (opponent.attackPoint - defensePoint);
-            Console.WriteLine($"{Name} se défend ! ");
+            
 
         }
 
-        private void SpecialAttack(Wrestler opponent)
+        public void SpecialAttack(Wrestler opponent)
         {
             Special_attack.AttackList[SpecialAttackIndex](this, opponent);
         }
 
 
-        public void ChooseAction(Wrestler opponent)
+        public Round.action ChooseAction(Wrestler opponent)
         {
             Random rnd = new Random();
             int rand = rnd.Next(0, 3);
@@ -88,17 +88,20 @@ namespace Catcheur_Manager.Models
             switch (rand)
             {
                 case 0:
-                    Hit(opponent);
-                    break;
+                    //Hit(opponent);
+                    Console.WriteLine($"{Name} attaque {opponent.Name}!");
+                    return Round.action.Attack;
 
                 case 1:
-                    block(opponent);
-                    break;
+                    //block(opponent);
+                    Console.WriteLine($"{Name} se défend!");
+                    return Round.action.Block;
 
-                case 2:
-                    SpecialAttack(/*this,*/ opponent);
-                    Console.WriteLine($"{this.Name} lance son attaque spéciale" );
-                    break;
+                default:
+                    //SpecialAttack(/*this,*/ opponent);
+                    Console.WriteLine($"{Name} lance son attaque spéciale!" );
+                    return Round.action.Special;
+
             }
 
         }
@@ -120,37 +123,6 @@ namespace Catcheur_Manager.Models
 
         public abstract string GetStringType();
 
-        public void DeterminateStatus(Wrestler opponent)
-        {
- 
-            if (defensePoint < opponent.defensePoint || defensePoint < defensePoint/2)
-            {
-                Console.WriteLine($"Catcheur {this.Name} à l'hopital");
-                this.Status = Wrestler._status.En_Convalescence;
-            }
-
-            StateOfCombat();
-
-
-
-        }
-
-        public void StateOfCombat()
-        {
-            if (this.defensePoint < 1)
-            {
-                Console.WriteLine($"Catcheur {this.Name} mort");
-                this.Status = Wrestler._status.Hors_d_etat;
-            }
-        }
-
-        public void ChangeStatus()
-        {
-            if (this.Status == Wrestler._status.En_Convalescence)
-            {
-
-            }
-        }
         public void UnselectWrestler()
         {
             isSelected = false;
@@ -169,6 +141,13 @@ namespace Catcheur_Manager.Models
             }
         }
 
+        public void SetConvalescent()
+        {
+            Status = _status.En_Convalescence;
+            ConvTime = new Random().Next(2, 6);
+            Console.WriteLine($"{Name} part à l'hopital pour une durée de {ConvTime} jours.");
+        }
+
         public void DecreaseConvTime()
         {
             ConvTime--;
@@ -182,6 +161,8 @@ namespace Catcheur_Manager.Models
         }
 
         public abstract void SetMaxLife();
+
+        public abstract int GetMaxLife();
 
         public override string ToString()
         {
