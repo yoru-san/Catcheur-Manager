@@ -76,7 +76,7 @@ namespace Catcheur_Manager.Models
             isEnd = false;
 
             Iteration = 0;
-            IterationMax = 2; //A CHANGER
+            IterationMax = 20;
 
 
             //RoundId = 1;
@@ -85,11 +85,6 @@ namespace Catcheur_Manager.Models
             MatchSeason = currentSeason.id;
             currentSeason.CurrentMatch = this;
             currentSeason.MatchHistory.Add(this);
-            Console.WriteLine(currentSeason.id);
-            Console.WriteLine(currentSeason.MatchHistory.Count);
-
-            Console.ReadKey();
-
             FirstWrestler = wres1;
             SecondWrestler = wres2;
             timer = new Timer();
@@ -176,6 +171,8 @@ namespace Catcheur_Manager.Models
             DeterminateWinner();
             DeterminateWayOfWinning();
             DeterminateWrestlersStatus();
+            FirstWrestler.ResetStats();
+            SecondWrestler.ResetStats();
             CalculateProfit();
         }
 
@@ -206,7 +203,7 @@ namespace Catcheur_Manager.Models
                     Console.WriteLine($"\nRound #{CurrentRound.id}");
                     Profit += 5000;
 
-                    Console.WriteLine($"C'est au tour de {WrestlerRound.Name} !");
+                    Console.WriteLine($"{WrestlerRound.Name} choisit sa stratégie!");
                     CurrentRound.Beginner = WrestlerRound;
                     CurrentRound.FirstAction = WrestlerRound.ChooseAction(SecondWrestler);
 
@@ -223,7 +220,7 @@ namespace Catcheur_Manager.Models
                 }
                 else
                 {
-                    Console.WriteLine($"C'est au tour de {WrestlerRound.Name} !");
+                    Console.WriteLine($"{WrestlerRound.Name} choisit sa stratégie!");
                     CurrentRound.Second = WrestlerRound;
                     CurrentRound.SecondAction = WrestlerRound.ChooseAction(FirstWrestler);
                     if (WrestlerRound == FirstWrestler)
