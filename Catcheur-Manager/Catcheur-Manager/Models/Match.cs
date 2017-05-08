@@ -272,7 +272,7 @@ namespace Catcheur_Manager.Models
                 $"Saison {MatchSeason} - Match {id}:\n\n"
                 + $"Combattant 1: {FirstWrestler.Name}\nCombattant 2: {SecondWrestler.Name}\n"
                 + $"Gagnant: {Winner.Name} par {GetStringWayOfWinning()}\n"
-                + $"Nombre de rounds: {Iteration}/{IterationMax}\n"
+                + $"Nombre de rounds: {Iteration}\n"
                 + $"Profit: {Profit}";
 
             /*foreach (Round round in Rounds) //pas implémenté
