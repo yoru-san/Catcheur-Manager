@@ -28,6 +28,11 @@ namespace Catcheur_Manager.Models
 
         public string specialDesc { get; set; }
 
+        public bool Shield { get; set; } //temporaire
+        public int extraAttack { get; set; } //temporaire
+
+        public int extraBlock { get; set; } //temporaire
+
         /*[XmlIgnore]
         public Action<Wrestler, Wrestler> SpecialAttack { get; set; }*/
         public int SpecialAttackIndex { get; set; }
@@ -58,25 +63,41 @@ namespace Catcheur_Manager.Models
             Status = status;
             SpecialAttackIndex = sp;
             specialDesc = sp_desc;
+            extraAttack = 0;
+            extraBlock = 0;
+            Shield = false;
         }
 
         public void Hit(Wrestler opponent)
         {
-            opponent.lifePoint -= attackPoint;
-            
+            if (!opponent.Shield)
+            {
 
+                opponent.Damage(attackPoint + extraAttack - opponent.extraBlock);
+            }
+                      
         }
 
         public void Block(Wrestler opponent)
         {
-            lifePoint -= (opponent.attackPoint - defensePoint);
+
+            Damage(opponent.attackPoint - (defensePoint+extraBlock));
             
 
         }
 
-        public void SpecialAttack(Wrestler opponent)
+        public void SpecialAttack(Wrestler opponent, Round round)
         {
-            Special_attack.AttackList[SpecialAttackIndex](this, opponent);
+            if (!opponent.Shield)
+            {
+                
+                Special_attack.AttackList[SpecialAttackIndex](this, opponent, round);
+            }
+            else
+            {
+                round.SetActionFromOrder(this, Round.action.Null);
+            }
+            
         }
 
 
@@ -88,18 +109,15 @@ namespace Catcheur_Manager.Models
             switch (rand)
             {
                 case 0:
-                    //Hit(opponent);
-                    Console.WriteLine($"{Name} attaque {opponent.Name}!");
+                    //Console.WriteLine($"{Name} attaque {opponent.Name}!");
                     return Round.action.Attack;
 
                 case 1:
-                    //block(opponent);
-                    Console.WriteLine($"{Name} se défend!");
+                    //Console.WriteLine($"{Name} se défend!");
                     return Round.action.Block;
 
                 default:
-                    //SpecialAttack(/*this,*/ opponent);
-                    Console.WriteLine($"{Name} lance son attaque spéciale!" );
+                    //Console.WriteLine($"{Name} lance son attaque spéciale!" );
                     return Round.action.Special;
 
             }
@@ -128,18 +146,36 @@ namespace Catcheur_Manager.Models
             isSelected = false;
         }
 
-        public bool VerifyLifepoint()
+        public void Heal(int heal)
         {
-            if (lifePoint <= 0)
+            Console.WriteLine($"{Name} récupère {heal} points de vie");
+            
+            if (lifePoint > GetMaxLife())
             {
-                Console.WriteLine($"fin du combat !");
-                return true;
+                SetMaxLife();
             }
-            else
-            {
-                return false;
-            }
+            Console.WriteLine($"La vie de {Name} passe à {lifePoint}");
         }
+
+        public void Damage(int dmg)
+        {
+            lifePoint -= dmg;
+            Console.WriteLine($"{Name} subit {dmg} points de dégats");
+            if (lifePoint < 0)
+            {
+                lifePoint = 0;
+            }
+            Console.WriteLine($"La vie de {Name} passe à {lifePoint}");
+        }
+
+        public void ResetExtra()
+        {
+            extraAttack = 0;
+            extraBlock = 0;
+            Shield = false;
+        }
+
+        public abstract void ResetStats();
 
         public void SetConvalescent()
         {

@@ -39,5 +39,11 @@ namespace Catcheur_Manager.Models
         {
             return 100;
         }
+
+        public override void ResetStats()
+        {
+            attackPoint = 5;
+            defensePoint = 1;
+        }
     }
 }

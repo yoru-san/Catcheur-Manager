@@ -60,13 +60,13 @@ namespace Catcheur_Manager.Models
             new Wrestler_Agile("Triple Hache", Wrestler._status.Disponible, this, 2, Special_attack.TH_desc);
             new Wrestler_Agile("Dead Poule", Wrestler._status.Disponible, this, 3, Special_attack.DP_desc);
             new Wrestler_Brute("L'ordonnateur des pompes funèbres", Wrestler._status.Disponible, this, 0, Special_attack.OPF_desc);
-            new Wrestler_Brute("Jarvan cinquième du nom", Wrestler._status.En_Convalescence,this, 4, Special_attack.JN_desc).ConvTime = new Random().Next(2, 6); //On ne connait pas le temps de conv. de base
-            new Wrestler_Agile("Madusa", Wrestler._status.Disponible, this, 5, Special_attack.M_desc);
-            new Wrestler_Agile("John Cinéma", Wrestler._status.En_Convalescence, this, 6, Special_attack.JC_desc).ConvTime = new Random().Next(2,6);
-            new Wrestler_Brute("Jeff Radis", Wrestler._status.En_Convalescence, this, 7, Special_attack.JR_desc).ConvTime = new Random().Next(2, 6);
-            new Wrestler_Brute("Raie Mystérieuse", Wrestler._status.Disponible, this, 8, Special_attack.RM_desc);
-            new Wrestler_Brute("Chris Hart", Wrestler._status.Disponible, this, 9, Special_attack.CH_desc);
-            new Wrestler_Agile("Bret Benoit", Wrestler._status.Disponible, this, 10, Special_attack.BB_desc);
+            new Wrestler_Brute("Jarvan cinquième du nom", Wrestler._status.En_Convalescence, this, 0, Special_attack.OPF_desc).SetConvalescent();
+            new Wrestler_Agile("Madusa", Wrestler._status.Disponible, this, 4, Special_attack.M_desc);
+            new Wrestler_Agile("John Cinéma", Wrestler._status.En_Convalescence, this, 2, Special_attack.TH_desc).SetConvalescent();
+            new Wrestler_Brute("Jeff Radis", Wrestler._status.En_Convalescence, this, 0, Special_attack.OPF_desc).SetConvalescent();
+            new Wrestler_Brute("Raie Mystérieuse", Wrestler._status.Disponible, this, 5, Special_attack.RM_desc);
+            new Wrestler_Brute("Chris Hart", Wrestler._status.Disponible, this, 0, Special_attack.OPF_desc);
+            new Wrestler_Agile("Bret Benoit", Wrestler._status.Disponible, this, 6, Special_attack.BB_desc);
 
         }
 
