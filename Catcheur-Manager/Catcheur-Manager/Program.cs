@@ -30,7 +30,7 @@ namespace Catcheur_Manager
             Special_attack.BuildAttackList();
 
         }
-        public static void FileCheck(string file)
+        public static void FileCheck(string file) //Entraine des fois des exceptions à la création du fichier
         {
             if (!File.Exists(file))
             {
@@ -43,7 +43,7 @@ namespace Catcheur_Manager
         static void Main(string[] args)
         {
             Console.Title = "Catcheur-Manager";
-            Console.SetWindowSize(100, 80);
+            //Console.SetWindowSize(100, 80);
             Loader();
             Menu.MenuStart();
 

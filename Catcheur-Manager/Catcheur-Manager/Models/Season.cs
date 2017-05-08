@@ -48,7 +48,9 @@ namespace Catcheur_Manager.Models
         }
         public override string ToString()
         {
-            return MatchHistory.Count.ToString();
+            string res = "";
+            res += $"Saison {id}:\n\nProfit: {Profit}\nMultiplicateur: {ProfitIncrement}";
+            return res;
         }
 
     }
